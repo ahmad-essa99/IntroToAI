@@ -1,5 +1,5 @@
-from agent import Agent, AgentType
-from enums import ActionType
+from agent import Agent
+from enums import ActionType, AgentType
 
 
 class HumanAgent(Agent):
@@ -9,6 +9,11 @@ class HumanAgent(Agent):
 
     def make_move(self, simulator):
         super().make_move(simulator)
+
+        if not simulator._set_of_targeted_vertices:
+            print(f"{self._agent_type}: no target vertices left -> TERMINATE")
+            return (ActionType.TERMINATE,)
+
         print("Your options:")
         print(" t <vertex>  - traverse to a neighbor (example: t 3)")
         print(" e           - equip amphibian kit")

@@ -21,7 +21,7 @@ class Graph:
         self._adj[edge._v1].append((edge._id, edge._v2))
         self._adj[edge._v2].append((edge._id, edge._v1))
 
-    def get_edge(self, vertex1, vertex2):
+    def get_edge(self, vertex1: int, vertex2: int) -> Edge:
         edge_id = None
 
         for current_edge_id,neighbor_id in self._adj[vertex1]:
@@ -38,12 +38,21 @@ class Graph:
 
         return False
 
+    def expand(self, vertex_id, is_equipped):
 
-    def print_vertex_info(self, vertex_id):
+        assert (vertex_id in self._vertices.keys()
+                and vertex_id in self._adj.keys()), f"can't expand {vertex_id}, it is not a vertex id"
+        ret = []
+        for edge_id, neighbor_id in self._adj[vertex_id]:
+            if is_equipped or not self._edges[edge_id]._is_flooded:
+                ret.append(neighbor_id)
+        return ret
+
+    def print_vertex_info(self, vertex_id, kits_in_vertex):
         vertex = self._vertices[vertex_id]
         print(f"Current Vertex ({vertex_id}) Info")
         print(f"People here    : {vertex._num_of_people}")
-        print(f"Kits here      : {vertex._num_of_kits}")
+        print(f"Kits here      : {kits_in_vertex}")
         print()
 
         print("Neighbors:")
@@ -61,7 +70,15 @@ class Graph:
                 f"\nGraph Adj:\n{self._adj.__repr__()}"
                 )
 
+    def _dijkstra_initial_checks(self, source_vertex, agent_is_equipped):
+        assert len(self._vertices.keys()) > 0, "can't run dijkstra on empty graph"
+        assert source_vertex in self._vertices.keys(), "can't run dijkstra on non existing vertex"
+
+
+    # O(ElogV) dijkstra run time
     def _shortest_path_with_simple_dijkstra(self, source_vertex, agent_is_equipped):
+        self._dijkstra_initial_checks(source_vertex, agent_is_equipped)
+
         dist = {}
         prev = {}
 
