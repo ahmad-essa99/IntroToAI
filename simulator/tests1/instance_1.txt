@@ -1,0 +1,19 @@
+#N 5                 ; small graph, mix of flooded/unflooded, two kits
+#U 1                 ; unequip time
+#Q 2                 ; equip time
+#P 3                 ; slowdown with kit
+
+#V1 K                ; start kit
+#V2 P1               ; one person
+#V3 P1
+#V4 P2 K             ; two people and a kit
+#V5 B
+
+#E1 1 2 W1 F         ; flooded short edge 1-2
+#E2 1 3 W4           ; unflooded long
+#E3 2 3 W1
+#E4 3 4 W2
+#E5 4 5 W1
+#E6 2 5 W5
+
+

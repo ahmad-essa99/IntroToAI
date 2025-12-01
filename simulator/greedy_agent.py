@@ -38,8 +38,9 @@ class GreedyAgent(Agent):
 
         for (succ_state, action) in successors:
             h = succ_state.mst_heuristic(simulator)
-            print(f"  successor: v={succ_state._current_vertex}, "
-                  f"equipped={succ_state._is_equipped}, h={h}, action={action}")
+            if self._debug:
+                print(f"  successor: v={succ_state._current_vertex}, "
+                      f"equipped={succ_state._is_equipped}, h={h}, action={action}")
 
             if h < best_h:
                 best_h = h
@@ -56,8 +57,8 @@ class GreedyAgent(Agent):
         if best_state is None or best_action is None or math.isinf(best_h):
             print("GreedyAgent: all successors have infinite heuristic -> NO_OP")
             return (ActionType.TERMINATE,)
-
-        print(f"GreedyAgent chooses action: {best_action}, heuristic={best_h}")
+        if self._debug:
+            print(f"GreedyAgent chooses action: {best_action}, heuristic={best_h}")
         return best_action
 
 

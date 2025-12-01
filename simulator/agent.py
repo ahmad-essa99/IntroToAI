@@ -4,7 +4,7 @@ from enum import Enum
 
 
 class Agent:
-    def __init__(self, id: int, starting_vertex: int):
+    def __init__(self, id: int, starting_vertex: int, debug=True):
 
         self._id = id
         self._current_vertex = starting_vertex
@@ -15,6 +15,8 @@ class Agent:
         self._agent_type = None
         self._reachable_targets_is_set = False
         self._set_of_reachable_targets = []
+        self._score = None
+        self._debug = debug
 
     def update_current_vertex(self, new_vertex):
         self._current_vertex = new_vertex
@@ -27,12 +29,13 @@ class Agent:
 
     def make_move(self, simulator):
         self.print_state()
-        simulator._graph.print_vertex_info(self._current_vertex, simulator._kits_locations.get(self._current_vertex, 0))
+        simulator._graph.print_vertex_info(self._current_vertex, simulator._kits_locations.get(self._current_vertex, 0),
+                                           debug=self._debug)
 
         if not self._reachable_targets_is_set:
             self._iniaite_reachable_targets_set(simulator)
-
-        print()
+        if self._debug:
+            print()
 
     def _iniaite_reachable_targets_set(self, simulator):
 
@@ -55,16 +58,18 @@ class Agent:
                 self._set_of_reachable_targets.append(target_vertex)
 
         self._reachable_targets_is_set = True
-        print(f"reachable targets are {self._set_of_reachable_targets}")
+        if self._debug:
+            print(f"reachable targets are {self._set_of_reachable_targets}")
 
     def print_state(self):
-        print(f"=== {self._agent_type.value} Agent (ID {self._id}) ===")
-        print(f"Current vertex       : {self._current_vertex}")
-        print(f"People picked        : {self._num_of_people_picked}")
-        print(f"Total actions done   : {self._num_of_actions}")
-        print(f"Elapsed time         : {self._agent_elapsed_time}")
-        print(f"Equipped with kit?   : {'Yes' if self._is_equipped else 'No'}")
-        print("----------------------------")
+        if self._debug:
+            print(f"=== {self._agent_type.value} Agent (ID {self._id}) ===")
+            print(f"Current vertex       : {self._current_vertex}")
+            print(f"People picked        : {self._num_of_people_picked}")
+            print(f"Total actions done   : {self._num_of_actions}")
+            print(f"Elapsed time         : {self._agent_elapsed_time}")
+            print(f"Equipped with kit?   : {'Yes' if self._is_equipped else 'No'}")
+            print("----------------------------")
 
     def _reconstruct_plan(self, end_node, save_as_goal=True):
         actions = []

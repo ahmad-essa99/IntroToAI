@@ -1,5 +1,6 @@
 import heapq
 import math
+import time
 
 from enums import ActionType, AgentType
 from Node import Node
@@ -28,6 +29,8 @@ class RealTime_A_StarAgent(Agent):
 
         if (self._current_goal_vertex and
                 self._current_goal_vertex in self._over_all_targets_sets):
+            if self._debug:
+                print("RL A* agent: we already have calculated plan , use it")
             action = self._current_plan.pop(0)
             return action
 
@@ -64,7 +67,6 @@ class RealTime_A_StarAgent(Agent):
         expansions = 0
 
         heapq.heappush(OPEN, (start_node.f, counter, start_node))
-
         while True:
             # if OPEN is empty then return failure
             if not OPEN:
@@ -77,20 +79,41 @@ class RealTime_A_StarAgent(Agent):
             if not node.state._targeted_vertices:
                 return self._reconstruct_plan(node)
 
-            expansions += 1
-            if expansions >= self._L:
-                print(f"RealTimeAStar: reached L={self._L} expansions, returning best-so-far node.")
-                plan = self._reconstruct_plan(node, save_as_goal=False)
-                return plan
-
             state_key = node.state.get_key()
             if node.f >= CLOSED.get(state_key, math.inf):
                 continue
 
+            node.compute_h(simulator)
             CLOSED[state_key] = node.f
+
+            expansions += 1
+            if expansions >= self._L:
+                if self._debug:
+                    print(f"RealTimeAStar: reached L={self._L} expansions, returning best frontier node.")
+                if not OPEN:
+                    return None
+
+                start_key = start_state.get_key()
+                best_node = None
+                best_tuple = None
+
+                for (_, _, candidate) in OPEN:
+                    if candidate.state.get_key() == start_key:
+                        continue
+
+                    cand_tuple = (len(candidate.state._targeted_vertices), candidate.f)
+                    if best_tuple is None or cand_tuple < best_tuple:
+                        best_tuple = cand_tuple
+                        best_node = candidate
+
+                if best_node is None:
+                    _, _, best_node = OPEN[0]
+
+                return self._reconstruct_plan(best_node, save_as_goal=False)
 
             # Expand node, push children into OPEN
             for child in node.expand(simulator):
+                child.compute_h(simulator)
                 counter += 1
                 heapq.heappush(OPEN, (child.f, counter, child))
 

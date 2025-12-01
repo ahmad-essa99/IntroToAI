@@ -1,0 +1,21 @@
+#N 6                 ; kit required to access most people (several flooded links)
+#U 1
+#Q 1
+#P 4
+
+#V1 K                ; only initial kit
+#V2 B
+#V3 P2
+#V4 P1
+#V5 B
+#V6 P3
+
+#E1 1 2 W1
+#E2 2 3 W2 F         ; flooded barrier toward V3
+#E3 3 4 W2 F         ; flooded barrier toward V4
+#E4 4 5 W1
+#E5 5 6 W3 F         ; flooded access to V6 from V5
+#E6 1 6 W10          ; long unflooded detour to V6
+#E7 2 5 W2           ; unflooded connector inside the component
+
+

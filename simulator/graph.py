@@ -48,20 +48,21 @@ class Graph:
                 ret.append(neighbor_id)
         return ret
 
-    def print_vertex_info(self, vertex_id, kits_in_vertex):
-        vertex = self._vertices[vertex_id]
-        print(f"Current Vertex ({vertex_id}) Info")
-        print(f"People here    : {vertex._num_of_people}")
-        print(f"Kits here      : {kits_in_vertex}")
-        print()
+    def print_vertex_info(self, vertex_id, kits_in_vertex, debug=True):
+        if debug:
+            vertex = self._vertices[vertex_id]
+            print(f"Current Vertex ({vertex_id}) Info")
+            print(f"People here    : {vertex._num_of_people}")
+            print(f"Kits here      : {kits_in_vertex}")
+            print()
 
-        print("Neighbors:")
-        for (edge_id, neighbor_id) in self._adj[vertex_id]:
-            edge = self._edges[edge_id]
-            flood = "FLOODED" if edge._is_flooded else "Not FLOODED"
-            print(f"  -> Vertex {neighbor_id} via Edge {edge_id} (weight {edge._weight}, {flood})")
+            print("Neighbors:")
+            for (edge_id, neighbor_id) in self._adj[vertex_id]:
+                edge = self._edges[edge_id]
+                flood = "FLOODED" if edge._is_flooded else "Not FLOODED"
+                print(f"  -> Vertex {neighbor_id} via Edge {edge_id} (weight {edge._weight}, {flood})")
 
-        print("----------------------------------------------")
+            print("----------------------------------------------")
 
     def __repr__(self):
 

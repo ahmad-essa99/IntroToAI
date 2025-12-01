@@ -3,6 +3,7 @@ from graph import Graph
 from enums import ActionType
 from greedy_agent import GreedyAgent
 from enums import AgentType
+from thief_agent import ThiefAgent
 from vertex import Vertex
 from edge import Edge
 from agent import Agent
@@ -11,9 +12,17 @@ from a_star_agent import A_StarAgent
 from rl_a_star_agent import RealTime_A_StarAgent
 from stupid_greedy_agent import StupidGreedyAgent
 
+AGENTS_MAP = {AgentType.HUMAN: HumanAgent,
+       AgentType.STUPID_GREEDY: StupidGreedyAgent,
+       AgentType.THIEF: ThiefAgent,
+       AgentType.GREEDY: GreedyAgent,
+       AgentType.A_STAR: A_StarAgent,
+       AgentType.REAL_TIME_A_STAR: RealTime_A_StarAgent
+       }
+
 
 class Simulator:
-    def __init__(self):
+    def __init__(self, debug = True):
         self._num_of_vertices = 0
         self._equip_time = 0
         self._unequip_time = 0
@@ -22,21 +31,25 @@ class Simulator:
         self._num_of_agents = 0
         self._agents = []
         self._active_agents = {}
+        self._debug = debug
+
         self._total_evacuated_people = 0
         self._total_elapsed_time = 0
         self._pre_computed_dijkstra_for_targets = {}
         self._set_of_targeted_vertices = []
+
         self._kits_locations = dict()
+
 
     def test_init(self, agent_types_and_loc):
         self._set_of_targeted_vertices = sorted(self._set_of_targeted_vertices)
         self.run_dijkstra_for_every_target()
-        self.test_init_agents(agent_types_and_loc)
+        self._init_agents(agent_types_and_loc)
 
-    def init_sim(self):
+    def init_sim(self, agent_types_and_loc):
         self._set_of_targeted_vertices = sorted(self._set_of_targeted_vertices)
         self.run_dijkstra_for_every_target()
-        self.temp_init_agents() # i need to replace it with user prompt
+        self._init_agents(agent_types_and_loc)
 
 
     def run_dijkstra_for_every_target(self):
@@ -57,7 +70,8 @@ class Simulator:
         is_equipped_agent = agent._is_equipped
         is_flooded_edge = chosen_edge._is_flooded
 
-        print(f"Edge ({chosen_edge._id}) is Flooded?: {is_flooded_edge}")
+        if self._debug:
+            print(f"Edge ({chosen_edge._id}) is Flooded?: {is_flooded_edge}")
 
         # if agent is equipped return true always, if not -> i need to check if edge is flooded
         return is_equipped_agent or not is_flooded_edge
@@ -67,7 +81,9 @@ class Simulator:
             print("invalid traverse move")
             self.handle_no_op_move(agent)
             return
-        print()
+
+        if self._debug:
+            print()
 
         chosen_edge = self._graph.get_edge(agent._current_vertex, next_vertex_id)
         agent.update_current_vertex(next_vertex_id)
@@ -77,7 +93,7 @@ class Simulator:
         self._total_elapsed_time+=step_time
 
         next_vertex = self._graph._vertices[next_vertex_id]
-        if next_vertex._num_of_people > 0:
+        if next_vertex._num_of_people > 0 and agent._agent_type != AgentType.THIEF:
             agent._num_of_people_picked += next_vertex._num_of_people
             self._total_evacuated_people += next_vertex._num_of_people
             next_vertex._num_of_people = 0
@@ -137,35 +153,34 @@ class Simulator:
             self.handle_no_op_move(agent)
 
     def print_world_state(self, agent):
-        print(f"=========== Current world state ===========")
-        print(f"Total evacuated people: {self._total_evacuated_people}")
-        print(f"Total elapsed time: {self._total_elapsed_time}")
-        print(f"Current set of targeted vertices : {self._set_of_targeted_vertices}")
-        print(f"Current Agent({agent._id}) score: {agent._num_of_people_picked*1000 - agent._agent_elapsed_time}")
-        print()
+        agent._score = agent._num_of_people_picked * 1000 - agent._agent_elapsed_time
+        if self._debug:
+            print(f"=========== Current world state ===========")
+            print(f"Total evacuated people: {self._total_evacuated_people}")
+            print(f"Total elapsed time: {self._total_elapsed_time}")
+            print(f"Current set of targeted vertices : {self._set_of_targeted_vertices}")
+            print(f"Current Agent({agent._id}) score: {agent._score}")
+            print()
 
     def start_agents_loop(self):
         while self._set_of_targeted_vertices and any(self._active_agents.values()):
             for agent in self._agents:
                 if self._active_agents[agent._id]:
                     next_move = agent.make_move(self)
-                    print(f"Agent ({agent._id}) Current move is {next_move}")
+                    if self._debug:
+                        print(f"Agent ({agent._id}) Current move is {next_move}")
                     self.handle_next_move(agent, next_move=next_move)
                     self.print_world_state(agent)
 
-    def test_init_agents(self, agent_types_and_loc):
+    def _init_agents(self, agent_types_and_loc):
         self._num_of_agents = len(agent_types_and_loc)
         curr_id = 1
         agent = None
         for agent_type, agent_loc in agent_types_and_loc:
-            if agent_type == AgentType.STUPID_GREEDY:
-                agent = StupidGreedyAgent(curr_id, starting_vertex=agent_loc)
-            elif agent_type == AgentType.GREEDY :
-                agent = GreedyAgent(curr_id, starting_vertex=agent_loc)
-            elif agent_type == AgentType.A_STAR :
-                agent = A_StarAgent(curr_id, starting_vertex=agent_loc)
-            elif agent_type == AgentType.REAL_TIME_A_STAR :
-                agent = RealTime_A_StarAgent(curr_id, starting_vertex=agent_loc)
+            agent_class = AGENTS_MAP.get(agent_type)
+            assert not agent_class == None, "you choosed wrong agent type"
+            agent = agent_class(curr_id, starting_vertex=agent_loc)
+            agent._debug=self._debug
             curr_id+=1
             self._add_new_agent(agent)
 
