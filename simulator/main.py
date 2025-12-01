@@ -64,6 +64,8 @@ if __name__ == "__main__":
     choosed_third_type = choose_third_agent_type()
     starting_vertex_id = choose_starting_vertex(simulator)
     agent_types_and_loc = [(AgentType.STUPID_GREEDY, 1), (AgentType.THIEF, 1), (choosed_third_type, starting_vertex_id)]
+    agent_types_and_loc = [(choosed_third_type, starting_vertex_id)]
+
     simulator.init_sim(agent_types_and_loc)
     simulator.start_agents_loop()
 

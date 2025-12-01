@@ -1,0 +1,130 @@
+Greedy Agent OUTPUT on attached_example1.txt:
+
+Choose third agent type:
+  1) Human
+  2) Stupid Greedy
+  3) Thief
+  4) Greedy Agent
+  5) A* Agent
+  6) Real Time A* Agent
+Enter your choice: 4
+choose agent starting agent, from 1 to 5:
+your choice: 1
+=== Greedy Agent (ID 1) ===
+Current vertex       : 1
+People picked        : 0
+Total actions done   : 0
+Elapsed time         : 0
+Equipped with kit?   : No
+----------------------------
+Current Vertex (1) Info
+People here    : 0
+Kits here      : 1
+
+Neighbors:
+  -> Vertex 2 via Edge 1 (weight 1, FLOODED)
+  -> Vertex 3 via Edge 2 (weight 4, Not FLOODED)
+----------------------------------------------
+reachable targets are [2, 3, 4]
+
+  successor: v=3, equipped=False, h=3.0, action=(<ActionType.TRAVERSE: 'TRAVERSE'>, 3)
+  successor: v=1, equipped=True, h=5.0, action=(<ActionType.EQUIP: 'EQUIP'>,)
+GreedyAgent chooses action: (<ActionType.TRAVERSE: 'TRAVERSE'>, 3), heuristic=3.0
+Agent (1) Current move is (<ActionType.TRAVERSE: 'TRAVERSE'>, 3)
+Edge (2) is Flooded?: False
+
+=========== Current world state ===========
+Total evacuated people: 1
+Total elapsed time: 4
+Current set of targeted vertices : [2, 4]
+Current Agent(1) score: 996
+
+=== Greedy Agent (ID 1) ===
+Current vertex       : 3
+People picked        : 1
+Total actions done   : 1
+Elapsed time         : 4
+Equipped with kit?   : No
+----------------------------
+Current Vertex (3) Info
+People here    : 0
+Kits here      : 0
+
+Neighbors:
+  -> Vertex 1 via Edge 2 (weight 4, Not FLOODED)
+  -> Vertex 2 via Edge 3 (weight 1, Not FLOODED)
+  -> Vertex 4 via Edge 4 (weight 2, Not FLOODED)
+----------------------------------------------
+
+  successor: v=1, equipped=False, h=4.0, action=(<ActionType.TRAVERSE: 'TRAVERSE'>, 1)
+  successor: v=2, equipped=False, h=3.0, action=(<ActionType.TRAVERSE: 'TRAVERSE'>, 2)
+  successor: v=4, equipped=False, h=3.0, action=(<ActionType.TRAVERSE: 'TRAVERSE'>, 4)
+GreedyAgent chooses action: (<ActionType.TRAVERSE: 'TRAVERSE'>, 2), heuristic=3.0
+Agent (1) Current move is (<ActionType.TRAVERSE: 'TRAVERSE'>, 2)
+Edge (3) is Flooded?: False
+
+=========== Current world state ===========
+Total evacuated people: 2
+Total elapsed time: 5
+Current set of targeted vertices : [4]
+Current Agent(1) score: 1995
+
+=== Greedy Agent (ID 1) ===
+Current vertex       : 2
+People picked        : 2
+Total actions done   : 2
+Elapsed time         : 5
+Equipped with kit?   : No
+----------------------------
+Current Vertex (2) Info
+People here    : 0
+Kits here      : 0
+
+Neighbors:
+  -> Vertex 1 via Edge 1 (weight 1, FLOODED)
+  -> Vertex 3 via Edge 3 (weight 1, Not FLOODED)
+  -> Vertex 5 via Edge 6 (weight 5, Not FLOODED)
+----------------------------------------------
+
+  successor: v=3, equipped=False, h=2.0, action=(<ActionType.TRAVERSE: 'TRAVERSE'>, 3)
+  successor: v=5, equipped=False, h=1.0, action=(<ActionType.TRAVERSE: 'TRAVERSE'>, 5)
+GreedyAgent chooses action: (<ActionType.TRAVERSE: 'TRAVERSE'>, 5), heuristic=1.0
+Agent (1) Current move is (<ActionType.TRAVERSE: 'TRAVERSE'>, 5)
+Edge (6) is Flooded?: False
+
+=========== Current world state ===========
+Total evacuated people: 2
+Total elapsed time: 10
+Current set of targeted vertices : [4]
+Current Agent(1) score: 1990
+
+=== Greedy Agent (ID 1) ===
+Current vertex       : 5
+People picked        : 2
+Total actions done   : 3
+Elapsed time         : 10
+Equipped with kit?   : No
+----------------------------
+Current Vertex (5) Info
+People here    : 0
+Kits here      : 0
+
+Neighbors:
+  -> Vertex 4 via Edge 5 (weight 1, Not FLOODED)
+  -> Vertex 2 via Edge 6 (weight 5, Not FLOODED)
+----------------------------------------------
+
+  successor: v=4, equipped=False, h=0.0, action=(<ActionType.TRAVERSE: 'TRAVERSE'>, 4)
+  successor: v=2, equipped=False, h=3.0, action=(<ActionType.TRAVERSE: 'TRAVERSE'>, 2)
+GreedyAgent chooses action: (<ActionType.TRAVERSE: 'TRAVERSE'>, 4), heuristic=0.0
+Agent (1) Current move is (<ActionType.TRAVERSE: 'TRAVERSE'>, 4)
+Edge (5) is Flooded?: False
+
+=========== Current world state ===========
+Total evacuated people: 4
+Total elapsed time: 11
+Current set of targeted vertices : []
+Current Agent(1) score: 3989
+
+
+Process finished with exit code 0
