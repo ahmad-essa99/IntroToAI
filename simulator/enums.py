@@ -8,9 +8,11 @@ class ActionType(Enum):
     TERMINATE = "TERMINATE"
 
 class AgentType(Enum):
-    HUMAN = "Human"
-    STUPID_GREEDY = "Stupid Greedy"
-    THIEF = "Thief"
-    GREEDY = "Greedy"
-    A_STAR = "A*"
-    REAL_TIME_A_STAR = "Real Time A*"
+    ADVERSARIAL = "Adversarial Agent"
+    SEMI_COOPERATIVE = "Semi Cooperative Agent"
+    FULLY_COOPERATIVE = "Fully Cooperative Agent"
+
+class GameType(Enum):
+    ADVERSARIAL = "Adversarial Game"
+    SEMI_COOPERATIVE = "Semi Cooperative Game"
+    FULLY_COOPERATIVE = "Fully Cooperative Game"

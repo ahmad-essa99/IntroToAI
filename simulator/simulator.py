@@ -1,23 +1,16 @@
 import math
 from graph import Graph
 from enums import ActionType
-from greedy_agent import GreedyAgent
 from enums import AgentType
-from thief_agent import ThiefAgent
+from adversarial_agent import AdversarialAgent
+from game_state import GameState
 from vertex import Vertex
 from edge import Edge
 from agent import Agent
-from human_agent import HumanAgent
-from a_star_agent import A_StarAgent
-from rl_a_star_agent import RealTime_A_StarAgent
-from stupid_greedy_agent import StupidGreedyAgent
 
-AGENTS_MAP = {AgentType.HUMAN: HumanAgent,
-       AgentType.STUPID_GREEDY: StupidGreedyAgent,
-       AgentType.THIEF: ThiefAgent,
-       AgentType.GREEDY: GreedyAgent,
-       AgentType.A_STAR: A_StarAgent,
-       AgentType.REAL_TIME_A_STAR: RealTime_A_StarAgent
+AGENTS_MAP = {AgentType.ADVERSARIAL: AdversarialAgent,
+                AgentType.SEMI_COOPERATIVE: None,
+                AgentType.FULLY_COOPERATIVE: None
        }
 
 
@@ -27,29 +20,71 @@ class Simulator:
         self._equip_time = 0
         self._unequip_time = 0
         self._kit_slowing_factor = 0
+        self._deadline_time = 0
         self._graph = Graph()
-        self._num_of_agents = 0
-        self._agents = []
-        self._active_agents = {}
         self._debug = debug
-
         self._total_evacuated_people = 0
         self._total_elapsed_time = 0
-        self._pre_computed_dijkstra_for_targets = {}
         self._set_of_targeted_vertices = []
-
         self._kits_locations = dict()
+        self._num_of_agents = 2
 
+        self._first_agent = None
+        self._second_agent = None
+        self._active_agents = {}
+        self.turn = 0
+
+    """
+    1. added _busy_time to Agent Class 
+        added in_progress_action and traverse_dest to Agent also
+        
+    2. added _deadline_time _first_agent and _second_agent and self.turn to Simulator class 
+    """
+
+    def get_game_state(self):
+        return GameState(
+            simulator=self,
+            first_agent_state=self._first_agent.get_agent_state(),
+            second_agent_state=self._second_agent.get_agent_state(),
+            target_vertices=self._graph.get_target_vertices(),
+            kits_locations=self._kits_locations,
+            turn=self.turn,
+            time=self._total_elapsed_time
+        )
 
     def test_init(self, agent_types_and_loc):
         self._set_of_targeted_vertices = sorted(self._set_of_targeted_vertices)
         self.run_dijkstra_for_every_target()
         self._init_agents(agent_types_and_loc)
 
-    def init_sim(self, agent_types_and_loc):
+    def init_sim(self, agents_types, first_agent_loc, sec_agent_loc):
         self._set_of_targeted_vertices = sorted(self._set_of_targeted_vertices)
-        self.run_dijkstra_for_every_target()
-        self._init_agents(agent_types_and_loc)
+        # self.run_dijkstra_for_every_target()
+        self._init_agents(agents_types, first_agent_loc, sec_agent_loc)
+
+
+    def _init_agents(self, agents_types, first_agent_loc, sec_agent_loc):
+        curr_id = 0
+        agent_class = AGENTS_MAP.get(agents_types)
+        assert not agent_class == None, "you choosed wrong agent type"
+
+        self._first_agent = agent_class(curr_id, starting_vertex=first_agent_loc, debug=self._debug)
+        curr_id+=1
+        self._second_agent = agent_class(curr_id, starting_vertex=sec_agent_loc, debug=self._debug)
+        self._add_new_agent(self._first_agent)
+        self._add_new_agent(self._second_agent)
+
+
+    def _add_new_agent(self, new_agent):
+        self._active_agents[new_agent._id] = True
+
+        current_vertex = self._graph._vertices[new_agent._current_vertex]
+        if current_vertex._num_of_people > 0:
+            new_agent._num_of_people_picked += current_vertex._num_of_people
+            self._total_evacuated_people += current_vertex._num_of_people
+            current_vertex._num_of_people = 0
+            self._set_of_targeted_vertices.remove(new_agent._current_vertex)
+            self.print_world_state(new_agent)
 
 
     def run_dijkstra_for_every_target(self):
@@ -60,6 +95,130 @@ class Simulator:
             dist, prev = self._graph._shortest_path_with_simple_dijkstra(
                 source_vertex=target_vertex, agent_is_equipped=True)
             self._pre_computed_dijkstra_for_targets[target_vertex] = (dist, prev)
+
+    def start_agents_loop(self):
+        seen_states = set()
+
+        while True:
+
+            if not self._set_of_targeted_vertices:
+                print("no remaining target_vertices, break the loop")
+                break
+
+            if self._total_elapsed_time >= self._deadline_time:
+                print("dead line time reached, break the loop")
+                break
+
+            game_state = self.get_game_state()
+            state_key = game_state.get_key()
+            if state_key in seen_states:
+                print("cycle state detected, break the loop")
+                break
+            seen_states.add(state_key)
+
+            agent = self._first_agent if self.turn == 0 else self._second_agent
+
+            agent_next_move = agent.make_move(self)
+            if self._debug:
+                print(f"Agent ({agent._id}) Current move is {agent_next_move}")
+
+            self._start_next_move(agent, agent_next_move)
+            self._advance_one_tick_for_agent(agent)
+
+            self._total_elapsed_time += 1
+            self.turn = 1 - self.turn
+            self.print_world_state(agent)
+
+    def _advance_one_tick_for_agent(self, agent):
+        if agent._busy_time <= 0:
+            return
+
+        agent._busy_time -= 1
+
+        if agent._busy_time == 0:
+            self._complete_action(agent)
+
+    def _complete_action(self, agent):
+
+        current_action = agent.in_progress_action
+
+        if current_action == ActionType.TRAVERSE:
+            agent._current_vertex = agent.traverse_dest
+            agent.traverse_dest = None
+            agent.in_progress_action = None
+
+            next_vertex = self._graph._vertices[agent._current_vertex]
+            if next_vertex._num_of_people > 0:
+                agent._num_of_people_picked += next_vertex._num_of_people
+                self._total_evacuated_people += next_vertex._num_of_people
+                next_vertex._num_of_people = 0
+                self._set_of_targeted_vertices.remove(agent._current_vertex)
+            return
+
+        if current_action == ActionType.EQUIP:
+            agent._is_equipped = True
+            agent.in_progress_action = None
+            return
+
+        if current_action == ActionType.UNEQUIP:
+            agent._is_equipped = False
+            self._kits_locations[agent._current_vertex] = self._kits_locations.get(
+                agent._current_vertex, 0) + 1
+            agent.in_progress_action = None
+            return
+
+
+        agent.in_progress_action = None
+        agent.traverse_dest = None
+
+    def _start_next_move(self, agent, next_move):
+        if agent._busy_time > 0:
+            return
+
+        action_type = next_move[0]
+
+        if action_type == ActionType.TRAVERSE and len(next_move) == 2:
+            dest = int(next_move[1])
+            if not self.check_if_valid_traverse_move(agent, dest):
+                self._start_no_op(agent)
+                return
+
+            agent._busy_time = self._kit_slowing_factor if agent._is_equipped else 1
+            agent.in_progress_action = ActionType.TRAVERSE
+            agent.traverse_dest = dest
+            return
+
+
+        if action_type == ActionType.EQUIP:
+            v = agent._current_vertex
+
+            if agent._is_equipped or self._kits_locations.get(v, 0) <= 0:
+                self._start_no_op(agent)
+                return
+            self._kits_locations[v] = self._kits_locations.get(v, 0) - 1
+
+            agent._busy_time = self._equip_time
+            agent.in_progress_action = ActionType.EQUIP
+            agent.traverse_dest = None
+            return
+
+        if action_type == ActionType.UNEQUIP:
+            if not agent._is_equipped:
+                self._start_no_op(agent)
+                return
+
+            agent._busy_time = self._unequip_time
+            agent.in_progress_action = ActionType.UNEQUIP
+            agent.traverse_dest = None
+            return
+
+        self._start_no_op(agent)
+
+    def _start_no_op(self, agent):
+        agent.in_progress_action = ActionType.NO_OP
+        agent.traverse_dest = None
+        agent._busy_time = 1
+
 
     def check_if_valid_traverse_move(self, agent, next_vertex):
         if not self._graph.is_connected(agent._current_vertex, next_vertex):
@@ -73,84 +232,8 @@ class Simulator:
         if self._debug:
             print(f"Edge ({chosen_edge._id}) is Flooded?: {is_flooded_edge}")
 
-        # if agent is equipped return true always, if not -> i need to check if edge is flooded
         return is_equipped_agent or not is_flooded_edge
 
-    def handle_traverse_move(self, agent, next_vertex_id):
-        if not self.check_if_valid_traverse_move(agent, next_vertex_id):
-            print("invalid traverse move")
-            self.handle_no_op_move(agent)
-            return
-
-        if self._debug:
-            print()
-
-        chosen_edge = self._graph.get_edge(agent._current_vertex, next_vertex_id)
-        agent.update_current_vertex(next_vertex_id)
-        agent.increase_num_of_actions()
-        step_time = chosen_edge._weight if not agent._is_equipped else chosen_edge._weight*self._kit_slowing_factor
-        agent.increase_elapsed_time(step_time)
-        self._total_elapsed_time+=step_time
-
-        next_vertex = self._graph._vertices[next_vertex_id]
-        if next_vertex._num_of_people > 0 and agent._agent_type != AgentType.THIEF:
-            agent._num_of_people_picked += next_vertex._num_of_people
-            self._total_evacuated_people += next_vertex._num_of_people
-            next_vertex._num_of_people = 0
-            self._set_of_targeted_vertices.remove(next_vertex_id)
-
-    def handle_equip_move(self, agent):
-        if agent._is_equipped:
-            print(f"Agent({agent._id}) already equipped")
-            self.handle_no_op_move(agent)
-            return
-
-        if self._kits_locations.get(agent._current_vertex, 0) < 1:
-            print(f"Current Vertex does not have a Kit to equip")
-            self.handle_no_op_move(agent)
-            return
-
-        self._kits_locations[agent._current_vertex] = (
-                self._kits_locations.get(agent._current_vertex, 0) - 1)
-        agent._is_equipped = True
-        agent.increase_elapsed_time(self._equip_time)
-        self._total_elapsed_time += self._equip_time
-        agent.increase_num_of_actions()
-
-    def handle_unequip_move(self, agent):
-        if not agent._is_equipped:
-            print(f"Agent({agent._id}) is not equipped")
-            self.handle_no_op_move(agent)
-            return
-
-        self._kits_locations[agent._current_vertex] = (
-                self._kits_locations.get(agent._current_vertex, 0) + 1)
-        agent._is_equipped = False
-        agent.increase_elapsed_time(self._unequip_time)
-        self._total_elapsed_time += self._unequip_time
-        agent.increase_num_of_actions()
-
-    def handle_no_op_move(self, agent):
-        print("No operation was choosed or forced")
-        agent.increase_elapsed_time(1)
-        self._total_elapsed_time += 1
-
-    def handle_next_move(self, agent, next_move):
-        if next_move[0] == ActionType.TRAVERSE and len(next_move) == 2:
-            self.handle_traverse_move(agent=agent, next_vertex_id=next_move[1])
-
-        elif next_move[0] == ActionType.EQUIP:
-            self.handle_equip_move(agent)
-
-        elif next_move[0] == ActionType.UNEQUIP:
-            self.handle_unequip_move(agent)
-
-        elif next_move[0] == ActionType.TERMINATE:
-            self._active_agents[agent._id] = False
-            print(f"agent {agent._agent_type} ({agent._id}) Terminated")
-
-        else:
-            self.handle_no_op_move(agent)
 
     def print_world_state(self, agent):
         agent._score = agent._num_of_people_picked * 1000 - agent._agent_elapsed_time
@@ -161,48 +244,6 @@ class Simulator:
             print(f"Current set of targeted vertices : {self._set_of_targeted_vertices}")
             print(f"Current Agent({agent._id}) score: {agent._score}")
             print()
-
-    def start_agents_loop(self):
-        while self._set_of_targeted_vertices and any(self._active_agents.values()):
-            for agent in self._agents:
-                if self._active_agents[agent._id]:
-                    next_move = agent.make_move(self)
-                    if self._debug:
-                        print(f"Agent ({agent._id}) Current move is {next_move}")
-                    self.handle_next_move(agent, next_move=next_move)
-                    self.print_world_state(agent)
-
-    def _init_agents(self, agent_types_and_loc):
-        self._num_of_agents = len(agent_types_and_loc)
-        curr_id = 1
-        agent = None
-        for agent_type, agent_loc in agent_types_and_loc:
-            agent_class = AGENTS_MAP.get(agent_type)
-            assert not agent_class == None, "you choosed wrong agent type"
-            agent = agent_class(curr_id, starting_vertex=agent_loc)
-            agent._debug=self._debug
-            curr_id+=1
-            self._add_new_agent(agent)
-
-
-    def temp_init_agents(self):
-        self._num_of_agents = 1
-        # human_agent = HumanAgent(1, starting_vertex=1)
-        greedy_agent = RealTime_A_StarAgent(2, starting_vertex=1)
-        # self._agents.append(human_agent)
-        self._add_new_agent(greedy_agent)
-
-    def _add_new_agent(self, new_agent):
-        self._agents.append(new_agent)
-        self._active_agents[new_agent._id] = True
-
-        current_vertex = self._graph._vertices[new_agent._current_vertex]
-        if current_vertex._num_of_people > 0:
-            new_agent._num_of_people_picked += current_vertex._num_of_people
-            self._total_evacuated_people += current_vertex._num_of_people
-            current_vertex._num_of_people = 0
-            self._set_of_targeted_vertices.remove(new_agent._current_vertex)
-            self.print_world_state(new_agent)
 
 
     def _handle_input_file_line(self, line):
@@ -218,6 +259,8 @@ class Simulator:
             self._equip_time = int(line_parts[1])
         elif line_header == "#P":
             self._kit_slowing_factor = int(line_parts[1])
+        elif line_header == "#D":
+            self._deadline_time = int(line_parts[1])
 
         # handle vertex case
         elif line_header.startswith("#V"):
@@ -240,7 +283,7 @@ class Simulator:
                 self._set_of_targeted_vertices.append(vertex_id)
 
         elif line_header.startswith("#E"):
-            if len(line_parts) < 4:
+            if len(line_parts) < 3:
                 print("input file edge line is invalid")
                 exit(1)
 
@@ -249,9 +292,9 @@ class Simulator:
             v1 = int(line_parts[1])
             v2 = int(line_parts[2])
 
-            weight = int(line_parts[3][1:])
+            weight = 1
             is_flooded = False
-            if len(line_parts) == 5 and line_parts[4] == "F":
+            if len(line_parts) == 4 and line_parts[3] == "F":
                 is_flooded = True
 
             current_edge = Edge(edge_id, v1, v2,

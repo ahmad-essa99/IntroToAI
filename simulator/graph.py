@@ -10,6 +10,15 @@ class Graph:
         self._edges = {}  # dict of int:Edge
         self._adj = {} # dict of int:list[tuple(Edge, Vertex)]
 
+
+    def get_target_vertices(self):
+        target_vertices = {}
+        for _,vertex in self._vertices.items():
+            if vertex._num_of_people > 0:
+                target_vertices[vertex._id] = vertex._num_of_people
+
+        return target_vertices
+
     def add_vertex(self, vertex: Vertex):
         vid = vertex._id
         self._vertices[vid] = vertex
