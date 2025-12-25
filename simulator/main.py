@@ -61,8 +61,8 @@ def choose_second_starting_vertex(simulator):
             print("Please enter a valid integer vertex id")
 
 if __name__ == "__main__":
-    simulator = Simulator()
-    read_and_parse_input_file(simulator, "example_input_file.txt")
+    simulator = Simulator(debug=True)
+    read_and_parse_input_file(simulator, "example_input_file1.txt")
     choosed_game_type = choose_game_type()
     first_agent_starting_vertex = choose_first_starting_vertex(simulator)
     second_agent_starting_vertex = choose_second_starting_vertex(simulator)

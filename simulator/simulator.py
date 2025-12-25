@@ -4,13 +4,15 @@ from enums import ActionType
 from enums import AgentType
 from adversarial_agent import AdversarialAgent
 from game_state import GameState
+from fully_cooperative_agent import FullyCooperativeAgent
+from semi_cooperative_agent import SemiCooperativeAgent
 from vertex import Vertex
 from edge import Edge
 from agent import Agent
 
 AGENTS_MAP = {AgentType.ADVERSARIAL: AdversarialAgent,
-                AgentType.SEMI_COOPERATIVE: None,
-                AgentType.FULLY_COOPERATIVE: None
+                AgentType.SEMI_COOPERATIVE: SemiCooperativeAgent,
+                AgentType.FULLY_COOPERATIVE: FullyCooperativeAgent
        }
 
 
@@ -28,18 +30,12 @@ class Simulator:
         self._set_of_targeted_vertices = []
         self._kits_locations = dict()
         self._num_of_agents = 2
-
         self._first_agent = None
         self._second_agent = None
-        self._active_agents = {}
         self.turn = 0
-
-    """
-    1. added _busy_time to Agent Class 
-        added in_progress_action and traverse_dest to Agent also
-        
-    2. added _deadline_time _first_agent and _second_agent and self.turn to Simulator class 
-    """
+        self._agents_type = None
+        self._first_agent_starting_loc = None
+        self._sec_agent_starting_loc = None
 
     def get_game_state(self):
         return GameState(
@@ -54,13 +50,19 @@ class Simulator:
 
     def test_init(self, agent_types_and_loc):
         self._set_of_targeted_vertices = sorted(self._set_of_targeted_vertices)
-        self.run_dijkstra_for_every_target()
         self._init_agents(agent_types_and_loc)
 
-    def init_sim(self, agents_types, first_agent_loc, sec_agent_loc):
+    def init_sim(self, agents_types=None, first_agent_loc=None, sec_agent_loc=None):
         self._set_of_targeted_vertices = sorted(self._set_of_targeted_vertices)
-        # self.run_dijkstra_for_every_target()
-        self._init_agents(agents_types, first_agent_loc, sec_agent_loc)
+
+        if agents_types:
+            self._agents_type = agents_types
+        if first_agent_loc:
+            self._first_agent_starting_loc = first_agent_loc
+        if sec_agent_loc:
+            self._sec_agent_starting_loc = sec_agent_loc
+
+        self._init_agents(self._agents_type, self._first_agent_starting_loc, self._sec_agent_starting_loc)
 
 
     def _init_agents(self, agents_types, first_agent_loc, sec_agent_loc):
@@ -76,7 +78,6 @@ class Simulator:
 
 
     def _add_new_agent(self, new_agent):
-        self._active_agents[new_agent._id] = True
 
         current_vertex = self._graph._vertices[new_agent._current_vertex]
         if current_vertex._num_of_people > 0:
@@ -84,35 +85,31 @@ class Simulator:
             self._total_evacuated_people += current_vertex._num_of_people
             current_vertex._num_of_people = 0
             self._set_of_targeted_vertices.remove(new_agent._current_vertex)
-            self.print_world_state(new_agent)
+            self.print_world_state()
 
-
-    def run_dijkstra_for_every_target(self):
-        # we don't have agent here , but we run dijkstra on a graph
-        # were there is not flooded edges (relaxed graph)
-
-        for target_vertex in self._set_of_targeted_vertices:
-            dist, prev = self._graph._shortest_path_with_simple_dijkstra(
-                source_vertex=target_vertex, agent_is_equipped=True)
-            self._pre_computed_dijkstra_for_targets[target_vertex] = (dist, prev)
 
     def start_agents_loop(self):
         seen_states = set()
 
         while True:
 
+            self.print_world_state()
+
             if not self._set_of_targeted_vertices:
-                print("no remaining target_vertices, break the loop")
+                if self._debug:
+                    print("no remaining target_vertices, break the loop")
                 break
 
             if self._total_elapsed_time >= self._deadline_time:
-                print("dead line time reached, break the loop")
+                if self._debug:
+                    print("dead line time reached, break the loop")
                 break
 
             game_state = self.get_game_state()
             state_key = game_state.get_key()
             if state_key in seen_states:
-                print("cycle state detected, break the loop")
+                if self._debug:
+                    print("cycle state detected, break the loop")
                 break
             seen_states.add(state_key)
 
@@ -127,7 +124,7 @@ class Simulator:
 
             self._total_elapsed_time += 1
             self.turn = 1 - self.turn
-            self.print_world_state(agent)
+
 
     def _advance_one_tick_for_agent(self, agent):
         if agent._busy_time <= 0:
@@ -234,16 +231,31 @@ class Simulator:
 
         return is_equipped_agent or not is_flooded_edge
 
+    def print_world_state(self):
+        agent0 = self._first_agent
+        agent1 = self._second_agent
+        IS0 = agent0._num_of_people_picked
+        IS1 = agent1._num_of_people_picked
 
-    def print_world_state(self, agent):
-        agent._score = agent._num_of_people_picked * 1000 - agent._agent_elapsed_time
+        if self._agents_type == AgentType.ADVERSARIAL:
+            TS0 = IS0 - IS1
+            TS1 = IS1 - IS0
+        elif self._agents_type == AgentType.FULLY_COOPERATIVE:
+            TS0 = IS0 + IS1
+            TS1 = IS0 + IS1
+        else: # semi
+            TS0 = IS0
+            TS1 = IS1
+
         if self._debug:
-            print(f"=========== Current world state ===========")
-            print(f"Total evacuated people: {self._total_evacuated_people}")
-            print(f"Total elapsed time: {self._total_elapsed_time}")
-            print(f"Current set of targeted vertices : {self._set_of_targeted_vertices}")
-            print(f"Current Agent({agent._id}) score: {agent._score}")
-            print()
+            print(f"\n==================== Current world state ====================")
+            print(f"time={self._total_elapsed_time} turn={self.turn} | "
+                  f"Agent0(v={agent0._current_vertex},eq={int(agent0._is_equipped)},busy={agent0._busy_time},saved={IS0}) | "
+                  f"Agent1(v={agent1._current_vertex},eq={int(agent1._is_equipped)},busy={agent1._busy_time},saved={IS1}) | "
+                  f"\nIS=(IS0={IS0},IS1={IS1}) TS=(TS0={TS0},TS1={TS1}) | "
+                  f"remaining targeted vertices={self._set_of_targeted_vertices}, Total evacuated people: {self._total_evacuated_people}")
+            print(f"==============================================================\n")
+
 
 
     def _handle_input_file_line(self, line):
@@ -261,6 +273,10 @@ class Simulator:
             self._kit_slowing_factor = int(line_parts[1])
         elif line_header == "#D":
             self._deadline_time = int(line_parts[1])
+        elif line_header == "#A0":
+            self._first_agent_starting_loc = int(line_parts[1])
+        elif line_header == "#A1":
+            self._sec_agent_starting_loc = int(line_parts[1])
 
         # handle vertex case
         elif line_header.startswith("#V"):
@@ -300,32 +316,6 @@ class Simulator:
             current_edge = Edge(edge_id, v1, v2,
                                 weight=weight, is_flooded=is_flooded)
             self._graph.add_edge(current_edge)
-
-    def step_cost(self, current_vertex_id, is_equipped, action):
-        action_type = action[0]
-
-        if action_type == ActionType.TRAVERSE:
-            _, next_vertex = action
-            edge_weight = self._graph.get_edge(current_vertex_id, next_vertex)._weight
-
-            if is_equipped:
-                return edge_weight * self._kit_slowing_factor
-            else:
-                return edge_weight
-
-        elif action_type == ActionType.EQUIP:
-            return self._equip_time
-
-        elif action_type == ActionType.UNEQUIP:
-            return self._unequip_time
-
-        elif action_type == ActionType.NO_OP:
-            return 1.0
-
-        elif action_type == ActionType.TERMINATE:
-            return 0.0
-
-        return math.inf
 
 
 

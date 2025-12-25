@@ -3,6 +3,7 @@ import time
 from enum import Enum
 
 from agent_state import AgentState
+from enums import ActionType
 
 
 class Agent:
@@ -11,7 +12,6 @@ class Agent:
         self._id = id
         self._current_vertex = starting_vertex
         self._num_of_people_picked = 0
-        self._agent_elapsed_time = 0
         self._is_equipped = False
         self._busy_time = 0
         self.in_progress_action = None
@@ -19,8 +19,6 @@ class Agent:
         self._agent_type = None
         self._debug = debug
 
-    def increase_elapsed_time(self, step_time):
-        self._agent_elapsed_time += step_time
 
     def make_move(self, simulator):
         self.print_state()
@@ -35,8 +33,14 @@ class Agent:
             print(f"=== {self._agent_type.value} Agent (ID {self._id}) ===")
             print(f"Current vertex       : {self._current_vertex}")
             print(f"People picked        : {self._num_of_people_picked}")
-            print(f"Elapsed time         : {self._agent_elapsed_time}")
             print(f"Equipped with kit?   : {'Yes' if self._is_equipped else 'No'}")
+            print(f"Agent is Busy?       : {'Yes' if self._busy_time > 0 else 'No'}")
+            if self._busy_time > 0:
+                print(f"Remaining Busy time  : {self._busy_time}")
+                print(f"Action in progress   : {self.in_progress_action}")
+                if self.in_progress_action == ActionType.TRAVERSE:
+                    print(f"Traverse Destination : {self.traverse_dest}")
+
             print("----------------------------")
 
 

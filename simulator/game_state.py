@@ -29,6 +29,7 @@ class GameState:
         return sum(self._target_vertices.values())
 
     def is_terminal_state(self):
+
         if self.total_remaining_people() == 0:
             return True
 

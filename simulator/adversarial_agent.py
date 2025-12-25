@@ -2,20 +2,20 @@
 
 import math
 from enums import ActionType
-from enums import AgentType  # if you keep AgentType enum in enums.py
+from enums import AgentType
 from agent import Agent
 
-from game_state import GameState
 
 
 class AdversarialAgent(Agent):
 
-    def __init__(self, id, starting_vertex, depth_limit=8, debug=True):
+    def __init__(self, id, starting_vertex, depth_limit=10, debug=True):
         super().__init__(id=id, starting_vertex=starting_vertex, debug=debug)
         self._agent_type = AgentType.ADVERSARIAL
         self._depth_limit = depth_limit
 
     def make_move(self, simulator):
+        super().make_move(simulator)
 
         if self._busy_time > 0:
             return (ActionType.NO_OP,)
@@ -41,6 +41,8 @@ class AdversarialAgent(Agent):
         return best_action
 
     def _max_value(self, state, depth, alpha, beta):
+        assert state.turn == self._id
+
         if state.is_terminal_state() or depth >= self._depth_limit:
             return self._evaluate(state)
 
@@ -57,6 +59,8 @@ class AdversarialAgent(Agent):
         return v
 
     def _min_value(self, state, depth, alpha, beta):
+        assert state.turn != self._id
+
         if state.is_terminal_state() or depth >= self._depth_limit:
             return self._evaluate(state)
 
