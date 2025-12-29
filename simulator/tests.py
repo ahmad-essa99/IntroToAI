@@ -62,6 +62,12 @@ if __name__ == "__main__":
     simulator = test_f(test_num=test_num, agents_types=AgentType.FULLY_COOPERATIVE, expected_scores=(2, 6))
     print("----------------------------------------------------------------")
 
+    test_num = 4
+    simulator = test_f(test_num=test_num, agents_types=AgentType.ADVERSARIAL, expected_scores=(5,4))
+    simulator = test_f(test_num=test_num, agents_types=AgentType.SEMI_COOPERATIVE, expected_scores=(5, 4))
+    simulator = test_f(test_num=test_num, agents_types=AgentType.FULLY_COOPERATIVE, expected_scores=(4, 5))
+    print("----------------------------------------------------------------")
+
 
 
 

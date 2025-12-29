@@ -1,0 +1,65 @@
+Semi Cooperative Game Output on test_1.txt
+
+Choose Game type:
+  1) Adversarial Game
+  2) Semi Cooperative Game
+  3) Fully Cooperative Game
+Enter your choice: 2
+choose FIRST agent starting vertex, from 1 to 4:
+your choice: 1
+choose SECOND agent starting vertex, from 1 to 4:
+your choice: 4
+
+==================== Current world state ====================
+time=0 turn=0 | Agent0(v=1,eq=0,busy=0,saved=0) | Agent1(v=4,eq=0,busy=0,saved=0) |
+IS=(IS0=0,IS1=0) TS=(TS0=0,TS1=0) | remaining targeted vertices=[2, 3], Total evacuated people: 0
+==============================================================
+
+=== Semi Cooperative Agent (ID 0) ===
+Current vertex       : 1
+People picked        : 0
+Equipped with kit?   : No
+Agent is Busy?       : No
+----------------------------
+Current Vertex (1) Info
+People here    : 0
+Kits here      : 0
+
+Neighbors:
+  -> Vertex 2 via Edge 1 (weight 1, Not FLOODED)
+  -> Vertex 3 via Edge 2 (weight 1, Not FLOODED)
+----------------------------------------------
+
+Agent (0) Current move is (<ActionType.TRAVERSE: 'TRAVERSE'>, 3)
+Edge (2) is Flooded?: False
+
+==================== Current world state ====================
+time=1 turn=1 | Agent0(v=3,eq=0,busy=0,saved=1) | Agent1(v=4,eq=0,busy=0,saved=0) |
+IS=(IS0=1,IS1=0) TS=(TS0=1,TS1=0) | remaining targeted vertices=[2], Total evacuated people: 1
+==============================================================
+
+=== Semi Cooperative Agent (ID 1) ===
+Current vertex       : 4
+People picked        : 0
+Equipped with kit?   : No
+Agent is Busy?       : No
+----------------------------
+Current Vertex (4) Info
+People here    : 0
+Kits here      : 0
+
+Neighbors:
+  -> Vertex 2 via Edge 3 (weight 1, Not FLOODED)
+----------------------------------------------
+
+Agent (1) Current move is (<ActionType.TRAVERSE: 'TRAVERSE'>, 2)
+Edge (3) is Flooded?: False
+
+==================== Current world state ====================
+time=2 turn=0 | Agent0(v=3,eq=0,busy=0,saved=1) | Agent1(v=2,eq=0,busy=0,saved=1) |
+IS=(IS0=1,IS1=1) TS=(TS0=1,TS1=1) | remaining targeted vertices=[], Total evacuated people: 2
+==============================================================
+
+no remaining target_vertices, break the loop
+
+Process finished with exit code 0
