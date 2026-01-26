@@ -1,4 +1,3 @@
-
 class Vertex:
 
     def __init__(self, id: int, num_of_people: int = 0):

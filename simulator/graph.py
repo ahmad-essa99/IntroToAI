@@ -1,128 +1,91 @@
+from collections import deque
+from dataclasses import dataclass
 from edge import Edge
-from vertex import Vertex
-import math
-import heapq
+
+
+@dataclass
+class ParsedProblem:
+    n_vertices: int
+    edges: list[Edge]
+    kits: set[int]
+    equip_cost: float
+    unequip_cost: float
+    slow_factor: float
+    start: int
+    target: int
 
 
 class Graph:
-    def __init__(self):
-        self._vertices = {} # dict of int:Vertex
-        self._edges = {}  # dict of int:Edge
-        self._adj = {} # dict of int:list[tuple(Edge, Vertex)]
+    """Undirected weighted graph."""
 
-    def add_vertex(self, vertex: Vertex):
-        vid = vertex._id
-        self._vertices[vid] = vertex
-        if vid not in self._adj:
-            self._adj[vid] = []
+    def __init__(self, n_vertices: int):
+        self.n_vertices = int(n_vertices)
+        self.edges: dict[int, Edge] = {}
+        self.adj: dict[int, list[int]] = {v: [] for v in range(1, self.n_vertices + 1)}
+        # map unordered pair -> edge_id
+        self._pair_to_edge_id: dict[tuple[int, int], int] = {}
 
-    def add_edge(self, edge: Edge):
-        self._edges[edge._id] = edge
-        self._adj[edge._v1].append((edge._id, edge._v2))
-        self._adj[edge._v2].append((edge._id, edge._v1))
+        # For belief-MDP:
+        # floodable edges get a dense index 0..m-1
+        self.floodable_edge_ids: list[int] = [] #A list of edge IDs that are floodable
+        self._edge_id_to_flood_idx: dict[int, int] = {} # Maps edge_id → flood_index in the belief tuple
+        self._pair_to_flood_idx: dict[tuple[int, int], int] = {}  # Maps an undirected vertex pair (min(u,v), max(u,v)) → flood_index
+        self._incident_flood_idxs: dict[int, list[int]] = {v: [] for v in range(1, self.n_vertices + 1)} # Maps vertex -> list of floodable edge indices incident to it
 
-    def get_edge(self, vertex1: int, vertex2: int) -> Edge:
-        edge_id = None
+    def add_edge(self, e: Edge) -> None:
+        if e.id in self.edges:
+            raise ValueError(f"duplicate edge id: {e.id}")
+        self.edges[e.id] = e
+        self.adj[e.v1].append(e.id)
+        self.adj[e.v2].append(e.id)
 
-        for current_edge_id,neighbor_id in self._adj[vertex1]:
-            if neighbor_id == vertex2:
-                edge_id = current_edge_id
-                break
+        k = e.key()
+        if k in self._pair_to_edge_id:
+            raise ValueError(f"duplicate undirected edge between {k[0]} and {k[1]}")
+        self._pair_to_edge_id[k] = e.id
 
-        return self._edges[edge_id]
+        if e.is_floodable:
+            idx = len(self.floodable_edge_ids)
+            self.floodable_edge_ids.append(e.id)
+            self._edge_id_to_flood_idx[e.id] = idx
+            self._pair_to_flood_idx[k] = idx
+            self._incident_flood_idxs[e.v1].append(idx)
+            self._incident_flood_idxs[e.v2].append(idx)
 
-    def is_connected(self, vertex1, vertex2):
-        for _,neighbor_id in self._adj[vertex1]:
-            if neighbor_id == vertex2:
+    def neighbors(self, v: int) -> list[tuple[int, Edge]]:
+        out: list[tuple[int, Edge]] = []
+        for eid in self.adj[v]:
+            e = self.edges[eid]
+            out.append((e.other(v), e))
+        return out
+
+    def edge_between(self, u: int, v: int) -> Edge:
+        k = (u, v) if u < v else (v, u)
+        eid = self._pair_to_edge_id.get(k)
+        if eid is None:
+            raise KeyError(f"no edge between {u} and {v}")
+        return self.edges[eid]
+
+    def flood_index_between(self, u: int, v: int) -> int | None:
+        k = (u, v) if u < v else (v, u)
+        return self._pair_to_flood_idx.get(k)
+
+    def incident_flood_indices(self, v: int) -> list[int]:
+        return self._incident_flood_idxs.get(v, [])
+
+    def is_reachable_via_sure_edges(self, start: int, goals: set[int]) -> bool:
+        """Reachability using only edges with flood_prob==0 (probability 1 unflooded)."""
+        q = deque([start])
+        seen = {start}
+        while q:
+            cur = q.popleft()
+            if cur in goals:
                 return True
-
-        return False
-
-    def expand(self, vertex_id, is_equipped):
-
-        assert (vertex_id in self._vertices.keys()
-                and vertex_id in self._adj.keys()), f"can't expand {vertex_id}, it is not a vertex id"
-        ret = []
-        for edge_id, neighbor_id in self._adj[vertex_id]:
-            if is_equipped or not self._edges[edge_id]._is_flooded:
-                ret.append(neighbor_id)
-        return ret
-
-    def print_vertex_info(self, vertex_id, kits_in_vertex, debug=True):
-        if debug:
-            vertex = self._vertices[vertex_id]
-            print(f"Current Vertex ({vertex_id}) Info")
-            print(f"People here    : {vertex._num_of_people}")
-            print(f"Kits here      : {kits_in_vertex}")
-            print()
-
-            print("Neighbors:")
-            for (edge_id, neighbor_id) in self._adj[vertex_id]:
-                edge = self._edges[edge_id]
-                flood = "FLOODED" if edge._is_flooded else "Not FLOODED"
-                print(f"  -> Vertex {neighbor_id} via Edge {edge_id} (weight {edge._weight}, {flood})")
-
-            print("----------------------------------------------")
-
-    def __repr__(self):
-
-        return (f"Graph Vertices:\n{self._vertices.__repr__()}"
-                f"\nGraph Edges:\n{self._edges.__repr__()}"
-                f"\nGraph Adj:\n{self._adj.__repr__()}"
-                )
-
-    def _dijkstra_initial_checks(self, source_vertex, agent_is_equipped):
-        assert len(self._vertices.keys()) > 0, "can't run dijkstra on empty graph"
-        assert source_vertex in self._vertices.keys(), "can't run dijkstra on non existing vertex"
-
-
-    # O(ElogV) dijkstra run time
-    def _shortest_path_with_simple_dijkstra(self, source_vertex, agent_is_equipped):
-        self._dijkstra_initial_checks(source_vertex, agent_is_equipped)
-
-        dist = {}
-        prev = {}
-
-        for vertex_id in self._vertices.keys():
-            dist[vertex_id] = math.inf
-            prev[vertex_id] = None
-
-        dist[source_vertex] = 0
-        heap = [(0, source_vertex)]
-
-        while heap:
-            current_vertex_val, current_vertex = heapq.heappop(heap)
-            if current_vertex_val != dist[current_vertex]:
-                continue  # current entry is not relevant
-
-            neighbors = self._adj.get(current_vertex)
-
-            for (edge_id, neighbor_id) in neighbors:
-                edge = self._edges[edge_id]
-
-                if edge._is_flooded and not agent_is_equipped:
+            for nxt, e in self.neighbors(cur):
+                if e.is_floodable:
+                    # floodable => may be flooded with positive prob
                     continue
-
-                w = edge._weight
-                neighbor_new_val = current_vertex_val + w
-
-                if neighbor_new_val < dist[neighbor_id]:
-                    dist[neighbor_id] = neighbor_new_val
-                    prev[neighbor_id] = current_vertex
-                    heapq.heappush(heap, (neighbor_new_val, neighbor_id))
-
-        return dist, prev
-
-    def _reconstruct_path(self, prev, source_id, target_id):
-
-        path = []
-        current = target_id
-        while current is not None and current != source_id:
-            path.append(current)
-            current = prev[current]
-
-        if current is None:
-            return []
-
-        path.reverse()
-        return path
+                if nxt not in seen:
+                    seen.add(nxt)
+                    q.append(nxt)
+        return False
