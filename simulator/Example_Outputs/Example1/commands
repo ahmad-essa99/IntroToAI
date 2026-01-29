@@ -1,0 +1,29 @@
+Commands:
+
+>> show
+>> reason
+>> path 2 4
+>> path 3
+
+>> add Ev 1 true
+>> reason
+
+# now F_1 should be forced to be true
+
+>> add Ev 2 true
+>> show
+
+>> reason
+# now F_2 and F_3 should go up
+
+>> path 2 4
+# now path 2 4 should get less prob to be free (F_2 have more prob to be flooded)
+
+>> path 3
+# now path 3 also should get less value , Ev_2=true -> more prob for F_3 to be true , so path 3 is free will get less prob
+
+>> reset
+>> show
+>> reason
+>> quit
+

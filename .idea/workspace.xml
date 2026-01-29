@@ -5,44 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="84ae57c8-a722-4bb5-9000-747736db7ea7" name="Changes" comment="more changes">
-      <change afterPath="$PROJECT_DIR$/simulator/bayes_network.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/simulator/bayes_network_node.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/simulator/Example_Outputs/a_star_output" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/simulator/Example_Outputs/attached_example1.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/simulator/Example_Outputs/greedy_agent_output" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/simulator/Example_Outputs/real_time_astar_output" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/simulator/Node.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/simulator/a_star_agent.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/simulator/agent.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/simulator/edge.py" beforeDir="false" afterPath="$PROJECT_DIR$/simulator/edge.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/simulator/enums.py" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/img.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/simulator/Example_Outputs/Example1/commands" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/simulator/Example_Outputs/Example1/input" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/simulator/Example_Outputs/Example1/output" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/simulator/Example_Outputs/Example2/commands" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/simulator/Example_Outputs/Example2/input" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/simulator/Example_Outputs/Example2/output" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/simulator/test_main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/simulator/example_input_file.txt" beforeDir="false" afterPath="$PROJECT_DIR$/simulator/example_input_file.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/simulator/graph.py" beforeDir="false" afterPath="$PROJECT_DIR$/simulator/graph.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/simulator/greedy_agent.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/simulator/human_agent.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/simulator/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/simulator/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/simulator/rl_a_star_agent.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/simulator/simulator.py" beforeDir="false" afterPath="$PROJECT_DIR$/simulator/simulator.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/simulator/state.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/simulator/stupid_greedy_agent.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/simulator/tests/test_1.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/simulator/tests/test_14.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/simulator/tests/test_15.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/simulator/tests/test_2.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/simulator/tests/test_3.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/simulator/tests/test_4.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/simulator/tests/test_5.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/simulator/tests/test_6.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/simulator/tests/test_7.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/simulator/tests/test_8.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/simulator/tests/test_9.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/simulator/tests1/instance_1.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/simulator/tests1/instance_2.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/simulator/tests1/instance_3.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/simulator/tests1/instance_4.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/simulator/tests1/instance_5.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/simulator/thief_agent.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/simulator/vertex.py" beforeDir="false" afterPath="$PROJECT_DIR$/simulator/vertex.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/simulator/tests.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -82,16 +57,16 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Python.main.executor": "Run",
-    "Python.tests.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "assignment3",
-    "last_opened_file_path": "C:/Users/ahmad/PycharmProjects/IntroToAI"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python.main.executor&quot;: &quot;Run&quot;,
+    &quot;Python.tests.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;assignment3&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/ahmad/PycharmProjects/IntroToAI&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\ahmad\PycharmProjects\IntroToAI\simulator\Example_Outputs\Example2" />
@@ -128,6 +103,28 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="test_main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="IntroToAI" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/simulator" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="C:\Users\ahmad\PycharmProjects\IntroToAI\simulator\test_main.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="tests" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="IntroToAI" />
       <option name="ENV_FILES" value="" />
@@ -153,6 +150,7 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python.main" />
+        <item itemvalue="Python.test_main" />
         <item itemvalue="Python.tests" />
       </list>
     </recent_temporary>

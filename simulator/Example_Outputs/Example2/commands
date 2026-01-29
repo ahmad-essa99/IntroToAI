@@ -1,0 +1,42 @@
+# test 1
+>> reason
+>> add F 1 false
+>> add F 2 false
+>> reason
+# mild should go up and extreme down
+>> add F 3 true
+>> add F 4 true
+>> reason
+# mild should go down and extreme up
+>> add F 5 false
+# mild should go up and extreme down
+
+
+# test 2
+>> reset
+>> show
+>> path 1 3 4 5
+>> add Ev 3 true
+>> path 1 3 4 5
+# Ev_3 = true , so 1to3 and 3to4 edges have more prob to bo flooded , so path free prob goes down
+
+
+>> reset
+>> add Ev 3 false
+>> path 1 3 4 5
+# Ev_3 = false, path prob should get up
+
+>> add F 4 true
+>> path 1 3 4 5
+# path prob should get to 0
+
+>> path 1 2 5
+>> add W mild
+>> path 1 2 5
+# W is mild , so path free prob should go up
+
+>> reset
+>> path 1 2 5
+>> add W extreme
+>> path 1 2 5
+# W is extreme , so path free prob should go down

@@ -1,0 +1,163 @@
+C:\Users\ahmad\PycharmProjects\IntroToAI\.venv\Scripts\python.exe C:\Users\ahmad\PycharmProjects\IntroToAI\simulator\main.py
+
+=== Part II Interactive Inference ===
+Commands:
+  reset                         -> clear evidence
+  add W <mild|stormy|extreme>    -> add weather evidence
+  add F <edge_id> <true|false>   -> add flooding evidence for edge
+  add Ev <vertex_id> <true|false>-> add evacuees evidence for vertex
+  show                          -> show current evidence
+  reason                        -> print posteriors for W, all F, all Ev
+  path <e1> <e2> ...             -> P(path free | evidence) for listed edge ids
+  quit
+
+>> show
+Current evidence: (empty)
+
+>> reason
+Current evidence: (empty)
+
+=== Current Evidence ===
+  {}
+
+=== Weather distribution (given evidence) ===
+  P(mild)    = 0.1
+  P(stormy)  = 0.4
+  P(extreme) = 0.5
+
+=== Edge flooding probabilities (given evidence) ===
+  P(F_1=True) = 0.48
+  P(F_2=True) = 0.24
+  P(F_3=True) = 0.72
+  P(F_4=True) = 0
+
+=== Vertex evacuees probabilities (given evidence) ===
+  P(Ev_1=True) = 0.336
+  P(Ev_2=True) = 0.71334
+  P(Ev_3=True) = 0.47388
+  P(Ev_4=True) = 0.648
+
+>> path 2 4
+Current evidence: (empty)
+
+P(path free for edges [2, 4] | evidence) = 0.76
+
+>> path 3
+Current evidence: (empty)
+
+P(path free for edges [3] | evidence) = 0.28
+
+>> add Ev 1 true
+Added evidence: Ev_1=True
+
+>> reason
+Current evidence:
+  Ev_1 = True
+
+=== Current Evidence ===
+  {'Ev_1': True}
+
+=== Weather distribution (given evidence) ===
+  P(mild)    = 0.041667
+  P(stormy)  = 0.333333
+  P(extreme) = 0.625
+
+=== Edge flooding probabilities (given evidence) ===
+  P(F_1=True) = 1
+  P(F_2=True) = 0.258333
+  P(F_3=True) = 0.775
+  P(F_4=True) = 0
+
+=== Vertex evacuees probabilities (given evidence) ===
+  P(Ev_1=True) = 1
+  P(Ev_2=True) = 0.7599
+  P(Ev_3=True) = 0.76975
+  P(Ev_4=True) = 0.6975
+
+>> add Ev 2
+Usage: add Ev <vertex_id> <true|false>
+
+>> show
+Current evidence:
+  Ev_1 = True
+
+>> add Ev 2 true
+Added evidence: Ev_2=True
+
+>> show
+Current evidence:
+  Ev_1 = True
+  Ev_2 = True
+
+>> reason
+Current evidence:
+  Ev_1 = True
+  Ev_2 = True
+
+=== Current Evidence ===
+  {'Ev_1': True, 'Ev_2': True}
+
+=== Weather distribution (given evidence) ===
+  P(mild)    = 0.018407
+  P(stormy)  = 0.273194
+  P(extreme) = 0.708399
+
+=== Edge flooding probabilities (given evidence) ===
+  P(F_1=True) = 1
+  P(F_2=True) = 0.330833
+  P(F_3=True) = 0.942756
+  P(F_4=True) = 0
+
+=== Vertex evacuees probabilities (given evidence) ===
+  P(Ev_1=True) = 1
+  P(Ev_2=True) = 1
+  P(Ev_3=True) = 0.789325
+  P(Ev_4=True) = 0.84848
+
+>> path 2 4
+Current evidence:
+  Ev_1 = True
+  Ev_2 = True
+
+P(path free for edges [2, 4] | evidence) = 0.669167
+
+>> path 3
+Current evidence:
+  Ev_1 = True
+  Ev_2 = True
+
+P(path free for edges [3] | evidence) = 0.057244
+
+>> reset
+Evidence cleared.
+
+>> show
+Current evidence: (empty)
+
+>> reason
+Current evidence: (empty)
+
+=== Current Evidence ===
+  {}
+
+=== Weather distribution (given evidence) ===
+  P(mild)    = 0.1
+  P(stormy)  = 0.4
+  P(extreme) = 0.5
+
+=== Edge flooding probabilities (given evidence) ===
+  P(F_1=True) = 0.48
+  P(F_2=True) = 0.24
+  P(F_3=True) = 0.72
+  P(F_4=True) = 0
+
+=== Vertex evacuees probabilities (given evidence) ===
+  P(Ev_1=True) = 0.336
+  P(Ev_2=True) = 0.71334
+  P(Ev_3=True) = 0.47388
+  P(Ev_4=True) = 0.648
+
+>> quit
+Bye.
+
+Process finished with exit code 0
