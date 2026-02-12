@@ -1,0 +1,925 @@
+PS C:\Users\sbiha\Desktop\IntroToAI\simulator> python -m main --input input3.txt --sims 4 --seed 123 --print-limit 150
+Reachable belief-states: 2517757
+Expected value from start: 20.787111
+
+=== Belief-state values and optimal actions (reachable states only) ===
+[0] Val=20.787111125  a=TRAVERSE -> 2  state=(v=1, equipped=0, kits={1,6,12}, K=[U,U,U,U,U,U,U])
+        transitions:
+          - EQUIP          cost=2  next=[1(p=1)]
+          - TRAVERSE -> 2  cost=2  next=[2(p=0.85), 3(p=0.15)]
+          - TRAVERSE -> 4  cost=6  next=[4(p=0.525), 5(p=0.225), 6(p=0.175), 7(p=0.075)]
+[1] Val=21.787111125  a=UNEQUIP  state=(v=1, equipped=1, kits={6,12}, K=[U,U,U,U,U,U,U])
+        transitions:
+          - UNEQUIP        cost=1  next=[0(p=1)]
+          - TRAVERSE -> 2  cost=6  next=[8(p=0.85), 9(p=0.15)]
+          - TRAVERSE -> 4  cost=18  next=[10(p=0.525), 11(p=0.225), 12(p=0.175), 13(p=0.075)]
+[2] Val=18.749542499999997  a=TRAVERSE -> 3  state=(v=2, equipped=0, kits={1,6,12}, K=[C,U,U,U,U,U,U])
+        transitions:
+          - TRAVERSE -> 1  cost=2  next=[14(p=1)]
+          - TRAVERSE -> 3  cost=2  next=[15(p=0.75), 16(p=0.25)]
+          - TRAVERSE -> 5  cost=5  next=[17(p=0.8), 18(p=0.2)]
+[3] Val=19.000000000000004  a=TRAVERSE -> 5  state=(v=2, equipped=0, kits={1,6,12}, K=[F,U,U,U,U,U,U])
+        transitions:
+          - TRAVERSE -> 1  cost=2  next=[19(p=1)]
+          - TRAVERSE -> 5  cost=5  next=[20(p=0.8), 21(p=0.2)]
+[4] Val=14.0  a=TRAVERSE -> 8  state=(v=4, equipped=0, kits={1,6,12}, K=[U,C,U,U,U,U,C])
+        transitions:
+          - TRAVERSE -> 3  cost=2  next=[22(p=0.85), 23(p=0.15)]
+          - TRAVERSE -> 5  cost=3  next=[24(p=0.8), 25(p=0.2)]
+          - TRAVERSE -> 8  cost=5  next=[26(p=0.7), 27(p=0.3)]
+          - TRAVERSE -> 1  cost=6  next=[28(p=1)]
+[5] Val=17.0  a=TRAVERSE -> 5  state=(v=4, equipped=0, kits={1,6,12}, K=[U,C,U,U,U,U,F])
+        transitions:
+          - TRAVERSE -> 3  cost=2  next=[29(p=0.85), 30(p=0.15)]
+          - TRAVERSE -> 5  cost=3  next=[31(p=0.8), 32(p=0.2)]
+          - TRAVERSE -> 1  cost=6  next=[33(p=1)]
+[6] Val=14.0  a=TRAVERSE -> 8  state=(v=4, equipped=0, kits={1,6,12}, K=[U,F,U,U,U,U,C])
+        transitions:
+          - TRAVERSE -> 5  cost=3  next=[34(p=0.8), 35(p=0.2)]
+          - TRAVERSE -> 8  cost=5  next=[36(p=0.7), 37(p=0.3)]
+          - TRAVERSE -> 1  cost=6  next=[38(p=1)]
+[7] Val=17.0  a=TRAVERSE -> 5  state=(v=4, equipped=0, kits={1,6,12}, K=[U,F,U,U,U,U,F])
+        transitions:
+          - TRAVERSE -> 5  cost=3  next=[39(p=0.8), 40(p=0.2)]
+          - TRAVERSE -> 1  cost=6  next=[41(p=1)]
+[8] Val=19.749542499999997  a=UNEQUIP  state=(v=2, equipped=1, kits={6,12}, K=[C,U,U,U,U,U,U])
+        transitions:
+          - UNEQUIP        cost=1  next=[42(p=1)]
+          - TRAVERSE -> 1  cost=6  next=[43(p=1)]
+          - TRAVERSE -> 3  cost=6  next=[44(p=0.75), 45(p=0.25)]
+          - TRAVERSE -> 5  cost=15  next=[46(p=0.8), 47(p=0.2)]
+[9] Val=20.000000000000004  a=UNEQUIP  state=(v=2, equipped=1, kits={6,12}, K=[F,U,U,U,U,U,U])
+        transitions:
+          - UNEQUIP        cost=1  next=[48(p=1)]
+          - TRAVERSE -> 1  cost=6  next=[49(p=1)]
+          - TRAVERSE -> 3  cost=6  next=[50(p=0.75), 51(p=0.25)]
+          - TRAVERSE -> 5  cost=15  next=[52(p=0.8), 53(p=0.2)]
+[10] Val=15.0  a=UNEQUIP  state=(v=4, equipped=1, kits={6,12}, K=[U,C,U,U,U,U,C])
+        transitions:
+          - UNEQUIP        cost=1  next=[54(p=1)]
+          - TRAVERSE -> 3  cost=6  next=[55(p=0.85), 56(p=0.15)]
+          - TRAVERSE -> 5  cost=9  next=[57(p=0.8), 58(p=0.2)]
+          - TRAVERSE -> 8  cost=15  next=[59(p=0.7), 60(p=0.3)]
+          - TRAVERSE -> 1  cost=18  next=[61(p=1)]
+[11] Val=18.0  a=UNEQUIP  state=(v=4, equipped=1, kits={6,12}, K=[U,C,U,U,U,U,F])
+        transitions:
+          - UNEQUIP        cost=1  next=[62(p=1)]
+          - TRAVERSE -> 3  cost=6  next=[63(p=0.85), 64(p=0.15)]
+          - TRAVERSE -> 5  cost=9  next=[65(p=0.8), 66(p=0.2)]
+          - TRAVERSE -> 8  cost=15  next=[67(p=0.7), 68(p=0.3)]
+          - TRAVERSE -> 1  cost=18  next=[69(p=1)]
+[12] Val=15.0  a=UNEQUIP  state=(v=4, equipped=1, kits={6,12}, K=[U,F,U,U,U,U,C])
+        transitions:
+          - UNEQUIP        cost=1  next=[70(p=1)]
+          - TRAVERSE -> 3  cost=6  next=[71(p=0.85), 72(p=0.15)]
+          - TRAVERSE -> 5  cost=9  next=[73(p=0.8), 74(p=0.2)]
+          - TRAVERSE -> 8  cost=15  next=[75(p=0.7), 76(p=0.3)]
+          - TRAVERSE -> 1  cost=18  next=[77(p=1)]
+[13] Val=18.0  a=UNEQUIP  state=(v=4, equipped=1, kits={6,12}, K=[U,F,U,U,U,U,F])
+        transitions:
+          - UNEQUIP        cost=1  next=[78(p=1)]
+          - TRAVERSE -> 3  cost=6  next=[79(p=0.85), 80(p=0.15)]
+          - TRAVERSE -> 5  cost=9  next=[81(p=0.8), 82(p=0.2)]
+          - TRAVERSE -> 8  cost=15  next=[83(p=0.7), 84(p=0.3)]
+          - TRAVERSE -> 1  cost=18  next=[85(p=1)]
+[14] Val=20.749542499999997  a=TRAVERSE -> 2  state=(v=1, equipped=0, kits={1,6,12}, K=[C,U,U,U,U,U,U])
+        transitions:
+          - EQUIP          cost=2  next=[43(p=1)]
+          - TRAVERSE -> 2  cost=2  next=[2(p=1)]
+          - TRAVERSE -> 4  cost=6  next=[86(p=0.525), 87(p=0.225), 88(p=0.175), 89(p=0.075)]
+[15] Val=16.749489999999998  a=TRAVERSE -> 7  state=(v=3, equipped=0, kits={1,6,12}, K=[C,C,U,U,U,U,U])
+        transitions:
+          - TRAVERSE -> 2  cost=2  next=[90(p=1)]
+          - TRAVERSE -> 4  cost=2  next=[86(p=0.7), 87(p=0.3)]
+          - TRAVERSE -> 7  cost=4  next=[91(p=0.7), 92(p=0.3)]
+[16] Val=16.749699999999997  a=TRAVERSE -> 7  state=(v=3, equipped=0, kits={1,6,12}, K=[C,F,U,U,U,U,U])
+        transitions:
+          - TRAVERSE -> 2  cost=2  next=[93(p=1)]
+          - TRAVERSE -> 7  cost=4  next=[94(p=0.7), 95(p=0.3)]
+[17] Val=14.0  a=TRAVERSE -> 9  state=(v=5, equipped=0, kits={1,6,12}, K=[C,U,C,U,U,U,U])
+        transitions:
+          - TRAVERSE -> 4  cost=3  next=[96(p=0.525), 97(p=0.225), 98(p=0.175), 99(p=0.075)]
+          - TRAVERSE -> 6  cost=2  next=[100(p=1)]
+          - TRAVERSE -> 2  cost=5  next=[101(p=1)]
+          - TRAVERSE -> 9  cost=6  next=[102(p=0.9), 103(p=0.1)]
+[18] Val=14.0  a=TRAVERSE -> 9  state=(v=5, equipped=0, kits={1,6,12}, K=[C,U,F,U,U,U,U])
+        transitions:
+          - TRAVERSE -> 4  cost=3  next=[104(p=0.525), 105(p=0.225), 106(p=0.175), 107(p=0.075)]
+          - TRAVERSE -> 2  cost=5  next=[108(p=1)]
+          - TRAVERSE -> 9  cost=6  next=[109(p=0.9), 110(p=0.1)]
+[19] Val=20.899999999999995  a=TRAVERSE -> 4  state=(v=1, equipped=0, kits={1,6,12}, K=[F,U,U,U,U,U,U])
+        transitions:
+          - EQUIP          cost=2  next=[49(p=1)]
+          - TRAVERSE -> 2  cost=2  next=[3(p=1)]
+          - TRAVERSE -> 4  cost=6  next=[111(p=0.525), 112(p=0.225), 113(p=0.175), 114(p=0.075)]
+[20] Val=14.0  a=TRAVERSE -> 9  state=(v=5, equipped=0, kits={1,6,12}, K=[F,U,C,U,U,U,U])
+        transitions:
+          - TRAVERSE -> 4  cost=3  next=[115(p=0.525), 116(p=0.225), 117(p=0.175), 118(p=0.075)]
+          - TRAVERSE -> 6  cost=2  next=[119(p=1)]
+          - TRAVERSE -> 2  cost=5  next=[120(p=1)]
+          - TRAVERSE -> 9  cost=6  next=[121(p=0.9), 122(p=0.1)]
+[21] Val=14.0  a=TRAVERSE -> 9  state=(v=5, equipped=0, kits={1,6,12}, K=[F,U,F,U,U,U,U])
+        transitions:
+          - TRAVERSE -> 4  cost=3  next=[123(p=0.525), 124(p=0.225), 125(p=0.175), 126(p=0.075)]
+          - TRAVERSE -> 2  cost=5  next=[127(p=1)]
+          - TRAVERSE -> 9  cost=6  next=[128(p=0.9), 129(p=0.1)]
+[22] Val=16.0  a=TRAVERSE -> 4  state=(v=3, equipped=0, kits={1,6,12}, K=[C,C,U,U,U,U,C])
+        transitions:
+          - TRAVERSE -> 2  cost=2  next=[130(p=1)]
+          - TRAVERSE -> 4  cost=2  next=[86(p=1)]
+          - TRAVERSE -> 7  cost=4  next=[131(p=0.7), 132(p=0.3)]
+[23] Val=16.0  a=TRAVERSE -> 4  state=(v=3, equipped=0, kits={1,6,12}, K=[F,C,U,U,U,U,C])
+        transitions:
+          - TRAVERSE -> 4  cost=2  next=[111(p=1)]
+          - TRAVERSE -> 7  cost=4  next=[133(p=0.7), 134(p=0.3)]
+[24] Val=14.0  a=TRAVERSE -> 9  state=(v=5, equipped=0, kits={1,6,12}, K=[U,C,C,U,U,U,C])
+        transitions:
+          - TRAVERSE -> 4  cost=3  next=[135(p=1)]
+          - TRAVERSE -> 6  cost=2  next=[136(p=1)]
+          - TRAVERSE -> 2  cost=5  next=[137(p=0.85), 138(p=0.15)]
+          - TRAVERSE -> 9  cost=6  next=[139(p=0.9), 140(p=0.1)]
+[25] Val=14.0  a=TRAVERSE -> 9  state=(v=5, equipped=0, kits={1,6,12}, K=[U,C,F,U,U,U,C])
+        transitions:
+          - TRAVERSE -> 4  cost=3  next=[141(p=1)]
+          - TRAVERSE -> 2  cost=5  next=[142(p=0.85), 143(p=0.15)]
+          - TRAVERSE -> 9  cost=6  next=[144(p=0.9), 145(p=0.1)]
+[26] Val=9.0  a=TRAVERSE -> 12  state=(v=8, equipped=0, kits={1,6,12}, K=[U,C,U,C,U,U,C])
+        transitions:
+          - TRAVERSE -> 7  cost=3  next=[146(p=1)]
+          - TRAVERSE -> 9  cost=2  next=[147(p=0.9), 148(p=0.1)]
+          - TRAVERSE -> 4  cost=5  next=[149(p=1)]
+          - TRAVERSE -> 12 cost=4  next=[150(p=0.65), 151(p=0.35)]
+[27] Val=9.0  a=TRAVERSE -> 12  state=(v=8, equipped=0, kits={1,6,12}, K=[U,C,U,F,U,U,C])
+        transitions:
+          - TRAVERSE -> 9  cost=2  next=[152(p=0.9), 153(p=0.1)]
+          - TRAVERSE -> 4  cost=5  next=[154(p=1)]
+          - TRAVERSE -> 12 cost=4  next=[155(p=0.65), 156(p=0.35)]
+[28] Val=20.0  a=TRAVERSE -> 4  state=(v=1, equipped=0, kits={1,6,12}, K=[U,C,U,U,U,U,C])
+        transitions:
+          - EQUIP          cost=2  next=[61(p=1)]
+          - TRAVERSE -> 2  cost=2  next=[130(p=0.85), 157(p=0.15)]
+          - TRAVERSE -> 4  cost=6  next=[4(p=1)]
+[29] Val=16.749699999999997  a=TRAVERSE -> 7  state=(v=3, equipped=0, kits={1,6,12}, K=[C,C,U,U,U,U,F])
+        transitions:
+          - TRAVERSE -> 2  cost=2  next=[158(p=1)]
+          - TRAVERSE -> 4  cost=2  next=[87(p=1)]
+          - TRAVERSE -> 7  cost=4  next=[159(p=0.7), 160(p=0.3)]
+[30] Val=16.749699999999997  a=TRAVERSE -> 7  state=(v=3, equipped=0, kits={1,6,12}, K=[F,C,U,U,U,U,F])
+        transitions:
+          - TRAVERSE -> 4  cost=2  next=[112(p=1)]
+          - TRAVERSE -> 7  cost=4  next=[161(p=0.7), 162(p=0.3)]
+[31] Val=14.0  a=TRAVERSE -> 9  state=(v=5, equipped=0, kits={1,6,12}, K=[U,C,C,U,U,U,F])
+        transitions:
+          - TRAVERSE -> 4  cost=3  next=[163(p=1)]
+          - TRAVERSE -> 6  cost=2  next=[164(p=1)]
+          - TRAVERSE -> 2  cost=5  next=[165(p=0.85), 166(p=0.15)]
+          - TRAVERSE -> 9  cost=6  next=[167(p=0.9), 168(p=0.1)]
+[32] Val=14.0  a=TRAVERSE -> 9  state=(v=5, equipped=0, kits={1,6,12}, K=[U,C,F,U,U,U,F])
+        transitions:
+          - TRAVERSE -> 4  cost=3  next=[169(p=1)]
+          - TRAVERSE -> 2  cost=5  next=[170(p=0.85), 171(p=0.15)]
+          - TRAVERSE -> 9  cost=6  next=[172(p=0.9), 173(p=0.1)]
+[33] Val=20.787245  a=TRAVERSE -> 2  state=(v=1, equipped=0, kits={1,6,12}, K=[U,C,U,U,U,U,F])
+        transitions:
+          - EQUIP          cost=2  next=[69(p=1)]
+          - TRAVERSE -> 2  cost=2  next=[158(p=0.85), 174(p=0.15)]
+          - TRAVERSE -> 4  cost=6  next=[5(p=1)]
+[34] Val=14.0  a=TRAVERSE -> 9  state=(v=5, equipped=0, kits={1,6,12}, K=[U,F,C,U,U,U,C])
+        transitions:
+          - TRAVERSE -> 4  cost=3  next=[175(p=1)]
+          - TRAVERSE -> 6  cost=2  next=[176(p=1)]
+          - TRAVERSE -> 2  cost=5  next=[177(p=0.85), 178(p=0.15)]
+          - TRAVERSE -> 9  cost=6  next=[179(p=0.9), 180(p=0.1)]
+[35] Val=14.0  a=TRAVERSE -> 9  state=(v=5, equipped=0, kits={1,6,12}, K=[U,F,F,U,U,U,C])
+        transitions:
+          - TRAVERSE -> 4  cost=3  next=[181(p=1)]
+          - TRAVERSE -> 2  cost=5  next=[182(p=0.85), 183(p=0.15)]
+          - TRAVERSE -> 9  cost=6  next=[184(p=0.9), 185(p=0.1)]
+[36] Val=9.0  a=TRAVERSE -> 12  state=(v=8, equipped=0, kits={1,6,12}, K=[U,F,U,C,U,U,C])
+        transitions:
+          - TRAVERSE -> 7  cost=3  next=[186(p=1)]
+          - TRAVERSE -> 9  cost=2  next=[187(p=0.9), 188(p=0.1)]
+          - TRAVERSE -> 4  cost=5  next=[189(p=1)]
+          - TRAVERSE -> 12 cost=4  next=[190(p=0.65), 191(p=0.35)]
+[37] Val=9.0  a=TRAVERSE -> 12  state=(v=8, equipped=0, kits={1,6,12}, K=[U,F,U,F,U,U,C])
+        transitions:
+          - TRAVERSE -> 9  cost=2  next=[192(p=0.9), 193(p=0.1)]
+          - TRAVERSE -> 4  cost=5  next=[194(p=1)]
+          - TRAVERSE -> 12 cost=4  next=[195(p=0.65), 196(p=0.35)]
+[38] Val=20.0  a=TRAVERSE -> 4  state=(v=1, equipped=0, kits={1,6,12}, K=[U,F,U,U,U,U,C])
+        transitions:
+          - EQUIP          cost=2  next=[77(p=1)]
+          - TRAVERSE -> 2  cost=2  next=[197(p=0.85), 198(p=0.15)]
+          - TRAVERSE -> 4  cost=6  next=[6(p=1)]
+[39] Val=14.0  a=TRAVERSE -> 9  state=(v=5, equipped=0, kits={1,6,12}, K=[U,F,C,U,U,U,F])
+        transitions:
+          - TRAVERSE -> 4  cost=3  next=[199(p=1)]
+          - TRAVERSE -> 6  cost=2  next=[200(p=1)]
+          - TRAVERSE -> 2  cost=5  next=[201(p=0.85), 202(p=0.15)]
+          - TRAVERSE -> 9  cost=6  next=[203(p=0.9), 204(p=0.1)]
+[40] Val=14.0  a=TRAVERSE -> 9  state=(v=5, equipped=0, kits={1,6,12}, K=[U,F,F,U,U,U,F])
+        transitions:
+          - TRAVERSE -> 4  cost=3  next=[205(p=1)]
+          - TRAVERSE -> 2  cost=5  next=[206(p=0.85), 207(p=0.15)]
+          - TRAVERSE -> 9  cost=6  next=[208(p=0.9), 209(p=0.1)]
+[41] Val=20.787245  a=TRAVERSE -> 2  state=(v=1, equipped=0, kits={1,6,12}, K=[U,F,U,U,U,U,F])
+        transitions:
+          - EQUIP          cost=2  next=[85(p=1)]
+          - TRAVERSE -> 2  cost=2  next=[210(p=0.85), 211(p=0.15)]
+          - TRAVERSE -> 4  cost=6  next=[7(p=1)]
+[42] Val=18.749542499999997  a=TRAVERSE -> 3  state=(v=2, equipped=0, kits={2,6,12}, K=[C,U,U,U,U,U,U])
+        transitions:
+          - EQUIP          cost=2  next=[8(p=1)]
+          - TRAVERSE -> 1  cost=2  next=[212(p=1)]
+          - TRAVERSE -> 3  cost=2  next=[213(p=0.75), 214(p=0.25)]
+          - TRAVERSE -> 5  cost=5  next=[215(p=0.8), 216(p=0.2)]
+[43] Val=21.749542499999997  a=UNEQUIP  state=(v=1, equipped=1, kits={6,12}, K=[C,U,U,U,U,U,U])
+        transitions:
+          - UNEQUIP        cost=1  next=[14(p=1)]
+          - TRAVERSE -> 2  cost=6  next=[8(p=1)]
+          - TRAVERSE -> 4  cost=18  next=[217(p=0.525), 218(p=0.225), 219(p=0.175), 220(p=0.075)]
+[44] Val=17.749489999999998  a=UNEQUIP  state=(v=3, equipped=1, kits={6,12}, K=[C,C,U,U,U,U,U])
+        transitions:
+          - UNEQUIP        cost=1  next=[221(p=1)]
+          - TRAVERSE -> 2  cost=6  next=[222(p=1)]
+          - TRAVERSE -> 4  cost=6  next=[217(p=0.7), 218(p=0.3)]
+          - TRAVERSE -> 7  cost=12  next=[223(p=0.7), 224(p=0.3)]
+[45] Val=17.749699999999997  a=UNEQUIP  state=(v=3, equipped=1, kits={6,12}, K=[C,F,U,U,U,U,U])
+        transitions:
+          - UNEQUIP        cost=1  next=[225(p=1)]
+          - TRAVERSE -> 2  cost=6  next=[226(p=1)]
+          - TRAVERSE -> 4  cost=6  next=[219(p=0.7), 220(p=0.3)]
+          - TRAVERSE -> 7  cost=12  next=[227(p=0.7), 228(p=0.3)]
+[46] Val=15.0  a=UNEQUIP  state=(v=5, equipped=1, kits={6,12}, K=[C,U,C,U,U,U,U])
+        transitions:
+          - UNEQUIP        cost=1  next=[229(p=1)]
+          - TRAVERSE -> 4  cost=9  next=[230(p=0.525), 231(p=0.225), 232(p=0.175), 233(p=0.075)]
+          - TRAVERSE -> 6  cost=6  next=[234(p=1)]
+          - TRAVERSE -> 2  cost=15  next=[235(p=1)]
+          - TRAVERSE -> 9  cost=18  next=[236(p=0.9), 237(p=0.1)]
+[47] Val=15.0  a=UNEQUIP  state=(v=5, equipped=1, kits={6,12}, K=[C,U,F,U,U,U,U])
+        transitions:
+          - UNEQUIP        cost=1  next=[238(p=1)]
+          - TRAVERSE -> 4  cost=9  next=[239(p=0.525), 240(p=0.225), 241(p=0.175), 242(p=0.075)]
+          - TRAVERSE -> 6  cost=6  next=[243(p=1)]
+          - TRAVERSE -> 2  cost=15  next=[244(p=1)]
+          - TRAVERSE -> 9  cost=18  next=[245(p=0.9), 246(p=0.1)]
+[48] Val=19.000000000000004  a=TRAVERSE -> 5  state=(v=2, equipped=0, kits={2,6,12}, K=[F,U,U,U,U,U,U])
+        transitions:
+          - EQUIP          cost=2  next=[9(p=1)]
+          - TRAVERSE -> 1  cost=2  next=[247(p=1)]
+          - TRAVERSE -> 5  cost=5  next=[248(p=0.8), 249(p=0.2)]
+[49] Val=21.899999999999995  a=UNEQUIP  state=(v=1, equipped=1, kits={6,12}, K=[F,U,U,U,U,U,U])
+        transitions:
+          - UNEQUIP        cost=1  next=[19(p=1)]
+          - TRAVERSE -> 2  cost=6  next=[9(p=1)]
+          - TRAVERSE -> 4  cost=18  next=[250(p=0.525), 251(p=0.225), 252(p=0.175), 253(p=0.075)]
+[50] Val=17.749489999999998  a=UNEQUIP  state=(v=3, equipped=1, kits={6,12}, K=[F,C,U,U,U,U,U])
+        transitions:
+          - UNEQUIP        cost=1  next=[254(p=1)]
+          - TRAVERSE -> 2  cost=6  next=[255(p=1)]
+          - TRAVERSE -> 4  cost=6  next=[250(p=0.7), 251(p=0.3)]
+          - TRAVERSE -> 7  cost=12  next=[256(p=0.7), 257(p=0.3)]
+[51] Val=17.749699999999997  a=UNEQUIP  state=(v=3, equipped=1, kits={6,12}, K=[F,F,U,U,U,U,U])
+        transitions:
+          - UNEQUIP        cost=1  next=[258(p=1)]
+          - TRAVERSE -> 2  cost=6  next=[259(p=1)]
+          - TRAVERSE -> 4  cost=6  next=[252(p=0.7), 253(p=0.3)]
+          - TRAVERSE -> 7  cost=12  next=[260(p=0.7), 261(p=0.3)]
+[52] Val=15.0  a=UNEQUIP  state=(v=5, equipped=1, kits={6,12}, K=[F,U,C,U,U,U,U])
+        transitions:
+          - UNEQUIP        cost=1  next=[262(p=1)]
+          - TRAVERSE -> 4  cost=9  next=[263(p=0.525), 264(p=0.225), 265(p=0.175), 266(p=0.075)]
+          - TRAVERSE -> 6  cost=6  next=[267(p=1)]
+          - TRAVERSE -> 2  cost=15  next=[268(p=1)]
+          - TRAVERSE -> 9  cost=18  next=[269(p=0.9), 270(p=0.1)]
+[53] Val=15.0  a=UNEQUIP  state=(v=5, equipped=1, kits={6,12}, K=[F,U,F,U,U,U,U])
+        transitions:
+          - UNEQUIP        cost=1  next=[271(p=1)]
+          - TRAVERSE -> 4  cost=9  next=[272(p=0.525), 273(p=0.225), 274(p=0.175), 275(p=0.075)]
+          - TRAVERSE -> 6  cost=6  next=[276(p=1)]
+          - TRAVERSE -> 2  cost=15  next=[277(p=1)]
+          - TRAVERSE -> 9  cost=18  next=[278(p=0.9), 279(p=0.1)]
+[54] Val=14.0  a=TRAVERSE -> 8  state=(v=4, equipped=0, kits={4,6,12}, K=[U,C,U,U,U,U,C])
+        transitions:
+          - EQUIP          cost=2  next=[10(p=1)]
+          - TRAVERSE -> 3  cost=2  next=[280(p=0.85), 281(p=0.15)]
+          - TRAVERSE -> 5  cost=3  next=[282(p=0.8), 283(p=0.2)]
+          - TRAVERSE -> 8  cost=5  next=[284(p=0.7), 285(p=0.3)]
+          - TRAVERSE -> 1  cost=6  next=[286(p=1)]
+[55] Val=17.0  a=UNEQUIP  state=(v=3, equipped=1, kits={6,12}, K=[C,C,U,U,U,U,C])
+        transitions:
+          - UNEQUIP        cost=1  next=[287(p=1)]
+          - TRAVERSE -> 2  cost=6  next=[288(p=1)]
+          - TRAVERSE -> 4  cost=6  next=[217(p=1)]
+          - TRAVERSE -> 7  cost=12  next=[289(p=0.7), 290(p=0.3)]
+[56] Val=17.0  a=UNEQUIP  state=(v=3, equipped=1, kits={6,12}, K=[F,C,U,U,U,U,C])
+        transitions:
+          - UNEQUIP        cost=1  next=[291(p=1)]
+          - TRAVERSE -> 2  cost=6  next=[292(p=1)]
+          - TRAVERSE -> 4  cost=6  next=[250(p=1)]
+          - TRAVERSE -> 7  cost=12  next=[293(p=0.7), 294(p=0.3)]
+[57] Val=15.0  a=UNEQUIP  state=(v=5, equipped=1, kits={6,12}, K=[U,C,C,U,U,U,C])
+        transitions:
+          - UNEQUIP        cost=1  next=[295(p=1)]
+          - TRAVERSE -> 4  cost=9  next=[296(p=1)]
+          - TRAVERSE -> 6  cost=6  next=[297(p=1)]
+          - TRAVERSE -> 2  cost=15  next=[298(p=0.85), 299(p=0.15)]
+          - TRAVERSE -> 9  cost=18  next=[300(p=0.9), 301(p=0.1)]
+[58] Val=15.0  a=UNEQUIP  state=(v=5, equipped=1, kits={6,12}, K=[U,C,F,U,U,U,C])
+        transitions:
+          - UNEQUIP        cost=1  next=[302(p=1)]
+          - TRAVERSE -> 4  cost=9  next=[303(p=1)]
+          - TRAVERSE -> 6  cost=6  next=[304(p=1)]
+          - TRAVERSE -> 2  cost=15  next=[305(p=0.85), 306(p=0.15)]
+          - TRAVERSE -> 9  cost=18  next=[307(p=0.9), 308(p=0.1)]
+[59] Val=10.0  a=UNEQUIP  state=(v=8, equipped=1, kits={6,12}, K=[U,C,U,C,U,U,C])
+        transitions:
+          - UNEQUIP        cost=1  next=[309(p=1)]
+          - TRAVERSE -> 7  cost=9  next=[310(p=1)]
+          - TRAVERSE -> 9  cost=6  next=[311(p=0.9), 312(p=0.1)]
+          - TRAVERSE -> 4  cost=15  next=[313(p=1)]
+          - TRAVERSE -> 12 cost=12  next=[314(p=0.65), 315(p=0.35)]
+[60] Val=10.0  a=UNEQUIP  state=(v=8, equipped=1, kits={6,12}, K=[U,C,U,F,U,U,C])
+        transitions:
+          - UNEQUIP        cost=1  next=[316(p=1)]
+          - TRAVERSE -> 7  cost=9  next=[317(p=1)]
+          - TRAVERSE -> 9  cost=6  next=[318(p=0.9), 319(p=0.1)]
+          - TRAVERSE -> 4  cost=15  next=[320(p=1)]
+          - TRAVERSE -> 12 cost=12  next=[321(p=0.65), 322(p=0.35)]
+[61] Val=21.0  a=UNEQUIP  state=(v=1, equipped=1, kits={6,12}, K=[U,C,U,U,U,U,C])
+        transitions:
+          - UNEQUIP        cost=1  next=[28(p=1)]
+          - TRAVERSE -> 2  cost=6  next=[288(p=0.85), 292(p=0.15)]
+          - TRAVERSE -> 4  cost=18  next=[10(p=1)]
+[62] Val=17.0  a=TRAVERSE -> 5  state=(v=4, equipped=0, kits={4,6,12}, K=[U,C,U,U,U,U,F])
+        transitions:
+          - EQUIP          cost=2  next=[11(p=1)]
+          - TRAVERSE -> 3  cost=2  next=[323(p=0.85), 324(p=0.15)]
+          - TRAVERSE -> 5  cost=3  next=[325(p=0.8), 326(p=0.2)]
+          - TRAVERSE -> 1  cost=6  next=[327(p=1)]
+[63] Val=17.749699999999997  a=UNEQUIP  state=(v=3, equipped=1, kits={6,12}, K=[C,C,U,U,U,U,F])
+        transitions:
+          - UNEQUIP        cost=1  next=[328(p=1)]
+          - TRAVERSE -> 2  cost=6  next=[329(p=1)]
+          - TRAVERSE -> 4  cost=6  next=[218(p=1)]
+          - TRAVERSE -> 7  cost=12  next=[330(p=0.7), 331(p=0.3)]
+[64] Val=17.749699999999997  a=UNEQUIP  state=(v=3, equipped=1, kits={6,12}, K=[F,C,U,U,U,U,F])
+        transitions:
+          - UNEQUIP        cost=1  next=[332(p=1)]
+          - TRAVERSE -> 2  cost=6  next=[333(p=1)]
+          - TRAVERSE -> 4  cost=6  next=[251(p=1)]
+          - TRAVERSE -> 7  cost=12  next=[334(p=0.7), 335(p=0.3)]
+[65] Val=15.0  a=UNEQUIP  state=(v=5, equipped=1, kits={6,12}, K=[U,C,C,U,U,U,F])
+        transitions:
+          - UNEQUIP        cost=1  next=[336(p=1)]
+          - TRAVERSE -> 4  cost=9  next=[337(p=1)]
+          - TRAVERSE -> 6  cost=6  next=[338(p=1)]
+          - TRAVERSE -> 2  cost=15  next=[339(p=0.85), 340(p=0.15)]
+          - TRAVERSE -> 9  cost=18  next=[341(p=0.9), 342(p=0.1)]
+[66] Val=15.0  a=UNEQUIP  state=(v=5, equipped=1, kits={6,12}, K=[U,C,F,U,U,U,F])
+        transitions:
+          - UNEQUIP        cost=1  next=[343(p=1)]
+          - TRAVERSE -> 4  cost=9  next=[344(p=1)]
+          - TRAVERSE -> 6  cost=6  next=[345(p=1)]
+          - TRAVERSE -> 2  cost=15  next=[346(p=0.85), 347(p=0.15)]
+          - TRAVERSE -> 9  cost=18  next=[348(p=0.9), 349(p=0.1)]
+[67] Val=10.0  a=UNEQUIP  state=(v=8, equipped=1, kits={6,12}, K=[U,C,U,C,U,U,F])
+        transitions:
+          - UNEQUIP        cost=1  next=[350(p=1)]
+          - TRAVERSE -> 7  cost=9  next=[351(p=1)]
+          - TRAVERSE -> 9  cost=6  next=[352(p=0.9), 353(p=0.1)]
+          - TRAVERSE -> 4  cost=15  next=[354(p=1)]
+          - TRAVERSE -> 12 cost=12  next=[355(p=0.65), 356(p=0.35)]
+[68] Val=10.0  a=UNEQUIP  state=(v=8, equipped=1, kits={6,12}, K=[U,C,U,F,U,U,F])
+        transitions:
+          - UNEQUIP        cost=1  next=[357(p=1)]
+          - TRAVERSE -> 7  cost=9  next=[358(p=1)]
+          - TRAVERSE -> 9  cost=6  next=[359(p=0.9), 360(p=0.1)]
+          - TRAVERSE -> 4  cost=15  next=[361(p=1)]
+          - TRAVERSE -> 12 cost=12  next=[362(p=0.65), 363(p=0.35)]
+[69] Val=21.787245  a=UNEQUIP  state=(v=1, equipped=1, kits={6,12}, K=[U,C,U,U,U,U,F])
+        transitions:
+          - UNEQUIP        cost=1  next=[33(p=1)]
+          - TRAVERSE -> 2  cost=6  next=[329(p=0.85), 333(p=0.15)]
+          - TRAVERSE -> 4  cost=18  next=[11(p=1)]
+[70] Val=14.0  a=TRAVERSE -> 8  state=(v=4, equipped=0, kits={4,6,12}, K=[U,F,U,U,U,U,C])
+        transitions:
+          - EQUIP          cost=2  next=[12(p=1)]
+          - TRAVERSE -> 5  cost=3  next=[364(p=0.8), 365(p=0.2)]
+          - TRAVERSE -> 8  cost=5  next=[366(p=0.7), 367(p=0.3)]
+          - TRAVERSE -> 1  cost=6  next=[368(p=1)]
+[71] Val=17.749699999999997  a=UNEQUIP  state=(v=3, equipped=1, kits={6,12}, K=[C,F,U,U,U,U,C])
+        transitions:
+          - UNEQUIP        cost=1  next=[369(p=1)]
+          - TRAVERSE -> 2  cost=6  next=[370(p=1)]
+          - TRAVERSE -> 4  cost=6  next=[219(p=1)]
+          - TRAVERSE -> 7  cost=12  next=[371(p=0.7), 372(p=0.3)]
+[72] Val=17.749699999999997  a=UNEQUIP  state=(v=3, equipped=1, kits={6,12}, K=[F,F,U,U,U,U,C])
+        transitions:
+          - UNEQUIP        cost=1  next=[373(p=1)]
+          - TRAVERSE -> 2  cost=6  next=[374(p=1)]
+          - TRAVERSE -> 4  cost=6  next=[252(p=1)]
+          - TRAVERSE -> 7  cost=12  next=[375(p=0.7), 376(p=0.3)]
+[73] Val=15.0  a=UNEQUIP  state=(v=5, equipped=1, kits={6,12}, K=[U,F,C,U,U,U,C])
+        transitions:
+          - UNEQUIP        cost=1  next=[377(p=1)]
+          - TRAVERSE -> 4  cost=9  next=[378(p=1)]
+          - TRAVERSE -> 6  cost=6  next=[379(p=1)]
+          - TRAVERSE -> 2  cost=15  next=[380(p=0.85), 381(p=0.15)]
+          - TRAVERSE -> 9  cost=18  next=[382(p=0.9), 383(p=0.1)]
+[74] Val=15.0  a=UNEQUIP  state=(v=5, equipped=1, kits={6,12}, K=[U,F,F,U,U,U,C])
+        transitions:
+          - UNEQUIP        cost=1  next=[384(p=1)]
+          - TRAVERSE -> 4  cost=9  next=[385(p=1)]
+          - TRAVERSE -> 6  cost=6  next=[386(p=1)]
+          - TRAVERSE -> 2  cost=15  next=[387(p=0.85), 388(p=0.15)]
+          - TRAVERSE -> 9  cost=18  next=[389(p=0.9), 390(p=0.1)]
+[75] Val=10.0  a=UNEQUIP  state=(v=8, equipped=1, kits={6,12}, K=[U,F,U,C,U,U,C])
+        transitions:
+          - UNEQUIP        cost=1  next=[391(p=1)]
+          - TRAVERSE -> 7  cost=9  next=[392(p=1)]
+          - TRAVERSE -> 9  cost=6  next=[393(p=0.9), 394(p=0.1)]
+          - TRAVERSE -> 4  cost=15  next=[395(p=1)]
+          - TRAVERSE -> 12 cost=12  next=[396(p=0.65), 397(p=0.35)]
+[76] Val=10.0  a=UNEQUIP  state=(v=8, equipped=1, kits={6,12}, K=[U,F,U,F,U,U,C])
+        transitions:
+          - UNEQUIP        cost=1  next=[398(p=1)]
+          - TRAVERSE -> 7  cost=9  next=[399(p=1)]
+          - TRAVERSE -> 9  cost=6  next=[400(p=0.9), 401(p=0.1)]
+          - TRAVERSE -> 4  cost=15  next=[402(p=1)]
+          - TRAVERSE -> 12 cost=12  next=[403(p=0.65), 404(p=0.35)]
+[77] Val=21.0  a=UNEQUIP  state=(v=1, equipped=1, kits={6,12}, K=[U,F,U,U,U,U,C])
+        transitions:
+          - UNEQUIP        cost=1  next=[38(p=1)]
+          - TRAVERSE -> 2  cost=6  next=[370(p=0.85), 374(p=0.15)]
+          - TRAVERSE -> 4  cost=18  next=[12(p=1)]
+[78] Val=17.0  a=TRAVERSE -> 5  state=(v=4, equipped=0, kits={4,6,12}, K=[U,F,U,U,U,U,F])
+        transitions:
+          - EQUIP          cost=2  next=[13(p=1)]
+          - TRAVERSE -> 5  cost=3  next=[405(p=0.8), 406(p=0.2)]
+          - TRAVERSE -> 1  cost=6  next=[407(p=1)]
+[79] Val=17.749699999999997  a=UNEQUIP  state=(v=3, equipped=1, kits={6,12}, K=[C,F,U,U,U,U,F])
+        transitions:
+          - UNEQUIP        cost=1  next=[408(p=1)]
+          - TRAVERSE -> 2  cost=6  next=[409(p=1)]
+          - TRAVERSE -> 4  cost=6  next=[220(p=1)]
+          - TRAVERSE -> 7  cost=12  next=[410(p=0.7), 411(p=0.3)]
+[80] Val=17.749699999999997  a=UNEQUIP  state=(v=3, equipped=1, kits={6,12}, K=[F,F,U,U,U,U,F])
+        transitions:
+          - UNEQUIP        cost=1  next=[412(p=1)]
+          - TRAVERSE -> 2  cost=6  next=[413(p=1)]
+          - TRAVERSE -> 4  cost=6  next=[253(p=1)]
+          - TRAVERSE -> 7  cost=12  next=[414(p=0.7), 415(p=0.3)]
+[81] Val=15.0  a=UNEQUIP  state=(v=5, equipped=1, kits={6,12}, K=[U,F,C,U,U,U,F])
+        transitions:
+          - UNEQUIP        cost=1  next=[416(p=1)]
+          - TRAVERSE -> 4  cost=9  next=[417(p=1)]
+          - TRAVERSE -> 6  cost=6  next=[418(p=1)]
+          - TRAVERSE -> 2  cost=15  next=[419(p=0.85), 420(p=0.15)]
+          - TRAVERSE -> 9  cost=18  next=[421(p=0.9), 422(p=0.1)]
+[82] Val=15.0  a=UNEQUIP  state=(v=5, equipped=1, kits={6,12}, K=[U,F,F,U,U,U,F])
+        transitions:
+          - UNEQUIP        cost=1  next=[423(p=1)]
+          - TRAVERSE -> 4  cost=9  next=[424(p=1)]
+          - TRAVERSE -> 6  cost=6  next=[425(p=1)]
+          - TRAVERSE -> 2  cost=15  next=[426(p=0.85), 427(p=0.15)]
+          - TRAVERSE -> 9  cost=18  next=[428(p=0.9), 429(p=0.1)]
+[83] Val=10.0  a=UNEQUIP  state=(v=8, equipped=1, kits={6,12}, K=[U,F,U,C,U,U,F])
+        transitions:
+          - UNEQUIP        cost=1  next=[430(p=1)]
+          - TRAVERSE -> 7  cost=9  next=[431(p=1)]
+          - TRAVERSE -> 9  cost=6  next=[432(p=0.9), 433(p=0.1)]
+          - TRAVERSE -> 4  cost=15  next=[434(p=1)]
+          - TRAVERSE -> 12 cost=12  next=[435(p=0.65), 436(p=0.35)]
+[84] Val=10.0  a=UNEQUIP  state=(v=8, equipped=1, kits={6,12}, K=[U,F,U,F,U,U,F])
+        transitions:
+          - UNEQUIP        cost=1  next=[437(p=1)]
+          - TRAVERSE -> 7  cost=9  next=[438(p=1)]
+          - TRAVERSE -> 9  cost=6  next=[439(p=0.9), 440(p=0.1)]
+          - TRAVERSE -> 4  cost=15  next=[441(p=1)]
+          - TRAVERSE -> 12 cost=12  next=[442(p=0.65), 443(p=0.35)]
+[85] Val=21.787245  a=UNEQUIP  state=(v=1, equipped=1, kits={6,12}, K=[U,F,U,U,U,U,F])
+        transitions:
+          - UNEQUIP        cost=1  next=[41(p=1)]
+          - TRAVERSE -> 2  cost=6  next=[409(p=0.85), 413(p=0.15)]
+          - TRAVERSE -> 4  cost=18  next=[13(p=1)]
+[86] Val=14.0  a=TRAVERSE -> 8  state=(v=4, equipped=0, kits={1,6,12}, K=[C,C,U,U,U,U,C])
+        transitions:
+          - TRAVERSE -> 3  cost=2  next=[22(p=1)]
+          - TRAVERSE -> 5  cost=3  next=[444(p=0.8), 445(p=0.2)]
+          - TRAVERSE -> 8  cost=5  next=[446(p=0.7), 447(p=0.3)]
+          - TRAVERSE -> 1  cost=6  next=[448(p=1)]
+[87] Val=17.0  a=TRAVERSE -> 5  state=(v=4, equipped=0, kits={1,6,12}, K=[C,C,U,U,U,U,F])
+        transitions:
+          - TRAVERSE -> 3  cost=2  next=[29(p=1)]
+          - TRAVERSE -> 5  cost=3  next=[449(p=0.8), 450(p=0.2)]
+          - TRAVERSE -> 1  cost=6  next=[451(p=1)]
+[88] Val=14.0  a=TRAVERSE -> 8  state=(v=4, equipped=0, kits={1,6,12}, K=[C,F,U,U,U,U,C])
+        transitions:
+          - TRAVERSE -> 5  cost=3  next=[452(p=0.8), 453(p=0.2)]
+          - TRAVERSE -> 8  cost=5  next=[454(p=0.7), 455(p=0.3)]
+          - TRAVERSE -> 1  cost=6  next=[456(p=1)]
+[89] Val=17.0  a=TRAVERSE -> 5  state=(v=4, equipped=0, kits={1,6,12}, K=[C,F,U,U,U,U,F])
+        transitions:
+          - TRAVERSE -> 5  cost=3  next=[457(p=0.8), 458(p=0.2)]
+          - TRAVERSE -> 1  cost=6  next=[459(p=1)]
+[90] Val=18.749489999999998  a=TRAVERSE -> 3  state=(v=2, equipped=0, kits={1,6,12}, K=[C,C,U,U,U,U,U])
+        transitions:
+          - TRAVERSE -> 1  cost=2  next=[460(p=1)]
+          - TRAVERSE -> 3  cost=2  next=[15(p=1)]
+          - TRAVERSE -> 5  cost=5  next=[461(p=0.8), 462(p=0.2)]
+[91] Val=12.0  a=TRAVERSE -> 8  state=(v=7, equipped=0, kits={1,6,12}, K=[C,C,U,C,U,U,U])
+        transitions:
+          - TRAVERSE -> 6  cost=2  next=[463(p=0.8), 464(p=0.2)]
+          - TRAVERSE -> 8  cost=3  next=[446(p=0.7), 465(p=0.3)]
+          - TRAVERSE -> 3  cost=4  next=[466(p=1)]
+          - TRAVERSE -> 11 cost=5  next=[467(p=0.65), 468(p=0.35)]
+[92] Val=14.4983  a=TRAVERSE -> 11  state=(v=7, equipped=0, kits={1,6,12}, K=[C,C,U,F,U,U,U])
+        transitions:
+          - TRAVERSE -> 6  cost=2  next=[469(p=0.8), 470(p=0.2)]
+          - TRAVERSE -> 3  cost=4  next=[471(p=1)]
+          - TRAVERSE -> 11 cost=5  next=[472(p=0.65), 473(p=0.35)]
+[93] Val=18.749699999999997  a=TRAVERSE -> 3  state=(v=2, equipped=0, kits={1,6,12}, K=[C,F,U,U,U,U,U])
+        transitions:
+          - TRAVERSE -> 1  cost=2  next=[474(p=1)]
+          - TRAVERSE -> 3  cost=2  next=[16(p=1)]
+          - TRAVERSE -> 5  cost=5  next=[475(p=0.8), 476(p=0.2)]
+[94] Val=12.0  a=TRAVERSE -> 8  state=(v=7, equipped=0, kits={1,6,12}, K=[C,F,U,C,U,U,U])
+        transitions:
+          - TRAVERSE -> 6  cost=2  next=[477(p=0.8), 478(p=0.2)]
+          - TRAVERSE -> 8  cost=3  next=[454(p=0.7), 479(p=0.3)]
+          - TRAVERSE -> 3  cost=4  next=[480(p=1)]
+          - TRAVERSE -> 11 cost=5  next=[481(p=0.65), 482(p=0.35)]
+[95] Val=14.499  a=TRAVERSE -> 11  state=(v=7, equipped=0, kits={1,6,12}, K=[C,F,U,F,U,U,U])
+        transitions:
+          - TRAVERSE -> 6  cost=2  next=[483(p=0.8), 484(p=0.2)]
+          - TRAVERSE -> 3  cost=4  next=[485(p=1)]
+          - TRAVERSE -> 11 cost=5  next=[486(p=0.65), 487(p=0.35)]
+[96] Val=14.0  a=TRAVERSE -> 8  state=(v=4, equipped=0, kits={1,6,12}, K=[C,C,C,U,U,U,C])
+        transitions:
+          - TRAVERSE -> 3  cost=2  next=[488(p=1)]
+          - TRAVERSE -> 5  cost=3  next=[444(p=1)]
+          - TRAVERSE -> 8  cost=5  next=[489(p=0.7), 490(p=0.3)]
+          - TRAVERSE -> 1  cost=6  next=[491(p=1)]
+[97] Val=17.0  a=TRAVERSE -> 5  state=(v=4, equipped=0, kits={1,6,12}, K=[C,C,C,U,U,U,F])
+        transitions:
+          - TRAVERSE -> 3  cost=2  next=[492(p=1)]
+          - TRAVERSE -> 5  cost=3  next=[449(p=1)]
+          - TRAVERSE -> 1  cost=6  next=[493(p=1)]
+[98] Val=14.0  a=TRAVERSE -> 8  state=(v=4, equipped=0, kits={1,6,12}, K=[C,F,C,U,U,U,C])
+        transitions:
+          - TRAVERSE -> 5  cost=3  next=[452(p=1)]
+          - TRAVERSE -> 8  cost=5  next=[494(p=0.7), 495(p=0.3)]
+          - TRAVERSE -> 1  cost=6  next=[496(p=1)]
+[99] Val=17.0  a=TRAVERSE -> 5  state=(v=4, equipped=0, kits={1,6,12}, K=[C,F,C,U,U,U,F])
+        transitions:
+          - TRAVERSE -> 5  cost=3  next=[457(p=1)]
+          - TRAVERSE -> 1  cost=6  next=[497(p=1)]
+[100] Val=14.413  a=TRAVERSE -> 10  state=(v=6, equipped=0, kits={1,6,12}, K=[C,U,C,U,U,U,U])
+        transitions:
+          - EQUIP          cost=2  next=[498(p=1)]
+          - TRAVERSE -> 5  cost=2  next=[17(p=1)]
+          - TRAVERSE -> 7  cost=2  next=[499(p=0.7), 500(p=0.3)]
+          - TRAVERSE -> 10 cost=4  next=[501(p=0.9), 502(p=0.1)]
+[101] Val=18.735  a=TRAVERSE -> 3  state=(v=2, equipped=0, kits={1,6,12}, K=[C,U,C,U,U,U,U])
+        transitions:
+          - TRAVERSE -> 1  cost=2  next=[503(p=1)]
+          - TRAVERSE -> 3  cost=2  next=[504(p=0.75), 505(p=0.25)]
+          - TRAVERSE -> 5  cost=5  next=[17(p=1)]
+[102] Val=8.0  a=TRAVERSE -> 13  state=(v=9, equipped=0, kits={1,6,12}, K=[C,U,C,U,C,U,U])
+        transitions:
+          - TRAVERSE -> 8  cost=2  next=[506(p=0.49), 507(p=0.21), 508(p=0.21), 509(p=0.09)]
+          - TRAVERSE -> 10 cost=2  next=[501(p=1)]
+          - TRAVERSE -> 13 cost=5  next=[510(p=1)]
+          - TRAVERSE -> 5  cost=6  next=[511(p=1)]
+[103] Val=8.0  a=TRAVERSE -> 13  state=(v=9, equipped=0, kits={1,6,12}, K=[C,U,C,U,F,U,U])
+        transitions:
+          - TRAVERSE -> 8  cost=2  next=[512(p=0.49), 513(p=0.21), 514(p=0.21), 515(p=0.09)]
+          - TRAVERSE -> 13 cost=5  next=[516(p=1)]
+          - TRAVERSE -> 5  cost=6  next=[517(p=1)]
+[104] Val=14.0  a=TRAVERSE -> 8  state=(v=4, equipped=0, kits={1,6,12}, K=[C,C,F,U,U,U,C])
+        transitions:
+          - TRAVERSE -> 3  cost=2  next=[518(p=1)]
+          - TRAVERSE -> 5  cost=3  next=[445(p=1)]
+          - TRAVERSE -> 8  cost=5  next=[519(p=0.7), 520(p=0.3)]
+          - TRAVERSE -> 1  cost=6  next=[521(p=1)]
+[105] Val=17.0  a=TRAVERSE -> 5  state=(v=4, equipped=0, kits={1,6,12}, K=[C,C,F,U,U,U,F])
+        transitions:
+          - TRAVERSE -> 3  cost=2  next=[522(p=1)]
+          - TRAVERSE -> 5  cost=3  next=[450(p=1)]
+          - TRAVERSE -> 1  cost=6  next=[523(p=1)]
+[106] Val=14.0  a=TRAVERSE -> 8  state=(v=4, equipped=0, kits={1,6,12}, K=[C,F,F,U,U,U,C])
+        transitions:
+          - TRAVERSE -> 5  cost=3  next=[453(p=1)]
+          - TRAVERSE -> 8  cost=5  next=[524(p=0.7), 525(p=0.3)]
+          - TRAVERSE -> 1  cost=6  next=[526(p=1)]
+[107] Val=17.0  a=TRAVERSE -> 5  state=(v=4, equipped=0, kits={1,6,12}, K=[C,F,F,U,U,U,F])
+        transitions:
+          - TRAVERSE -> 5  cost=3  next=[458(p=1)]
+          - TRAVERSE -> 1  cost=6  next=[527(p=1)]
+[108] Val=18.807712499999997  a=TRAVERSE -> 3  state=(v=2, equipped=0, kits={1,6,12}, K=[C,U,F,U,U,U,U])
+        transitions:
+          - TRAVERSE -> 1  cost=2  next=[528(p=1)]
+          - TRAVERSE -> 3  cost=2  next=[529(p=0.75), 530(p=0.25)]
+          - TRAVERSE -> 5  cost=5  next=[18(p=1)]
+[109] Val=8.0  a=TRAVERSE -> 13  state=(v=9, equipped=0, kits={1,6,12}, K=[C,U,F,U,C,U,U])
+        transitions:
+          - TRAVERSE -> 8  cost=2  next=[531(p=0.49), 532(p=0.21), 533(p=0.21), 534(p=0.09)]
+          - TRAVERSE -> 10 cost=2  next=[535(p=1)]
+          - TRAVERSE -> 13 cost=5  next=[536(p=1)]
+          - TRAVERSE -> 5  cost=6  next=[537(p=1)]
+[110] Val=8.0  a=TRAVERSE -> 13  state=(v=9, equipped=0, kits={1,6,12}, K=[C,U,F,U,F,U,U])
+        transitions:
+          - TRAVERSE -> 8  cost=2  next=[538(p=0.49), 539(p=0.21), 540(p=0.21), 541(p=0.09)]
+          - TRAVERSE -> 13 cost=5  next=[542(p=1)]
+          - TRAVERSE -> 5  cost=6  next=[543(p=1)]
+[111] Val=14.0  a=TRAVERSE -> 8  state=(v=4, equipped=0, kits={1,6,12}, K=[F,C,U,U,U,U,C])
+        transitions:
+          - TRAVERSE -> 3  cost=2  next=[23(p=1)]
+          - TRAVERSE -> 5  cost=3  next=[544(p=0.8), 545(p=0.2)]
+          - TRAVERSE -> 8  cost=5  next=[546(p=0.7), 547(p=0.3)]
+          - TRAVERSE -> 1  cost=6  next=[548(p=1)]
+[112] Val=17.0  a=TRAVERSE -> 5  state=(v=4, equipped=0, kits={1,6,12}, K=[F,C,U,U,U,U,F])
+        transitions:
+          - TRAVERSE -> 3  cost=2  next=[30(p=1)]
+          - TRAVERSE -> 5  cost=3  next=[549(p=0.8), 550(p=0.2)]
+          - TRAVERSE -> 1  cost=6  next=[551(p=1)]
+[113] Val=14.0  a=TRAVERSE -> 8  state=(v=4, equipped=0, kits={1,6,12}, K=[F,F,U,U,U,U,C])
+        transitions:
+          - TRAVERSE -> 5  cost=3  next=[552(p=0.8), 553(p=0.2)]
+          - TRAVERSE -> 8  cost=5  next=[554(p=0.7), 555(p=0.3)]
+          - TRAVERSE -> 1  cost=6  next=[556(p=1)]
+[114] Val=17.0  a=TRAVERSE -> 5  state=(v=4, equipped=0, kits={1,6,12}, K=[F,F,U,U,U,U,F])
+        transitions:
+          - TRAVERSE -> 5  cost=3  next=[557(p=0.8), 558(p=0.2)]
+          - TRAVERSE -> 1  cost=6  next=[559(p=1)]
+[115] Val=14.0  a=TRAVERSE -> 8  state=(v=4, equipped=0, kits={1,6,12}, K=[F,C,C,U,U,U,C])
+        transitions:
+          - TRAVERSE -> 3  cost=2  next=[560(p=1)]
+          - TRAVERSE -> 5  cost=3  next=[544(p=1)]
+          - TRAVERSE -> 8  cost=5  next=[561(p=0.7), 562(p=0.3)]
+          - TRAVERSE -> 1  cost=6  next=[563(p=1)]
+[116] Val=17.0  a=TRAVERSE -> 5  state=(v=4, equipped=0, kits={1,6,12}, K=[F,C,C,U,U,U,F])
+        transitions:
+          - TRAVERSE -> 3  cost=2  next=[564(p=1)]
+          - TRAVERSE -> 5  cost=3  next=[549(p=1)]
+          - TRAVERSE -> 1  cost=6  next=[565(p=1)]
+[117] Val=14.0  a=TRAVERSE -> 8  state=(v=4, equipped=0, kits={1,6,12}, K=[F,F,C,U,U,U,C])
+        transitions:
+          - TRAVERSE -> 5  cost=3  next=[552(p=1)]
+          - TRAVERSE -> 8  cost=5  next=[566(p=0.7), 567(p=0.3)]
+          - TRAVERSE -> 1  cost=6  next=[568(p=1)]
+[118] Val=17.0  a=TRAVERSE -> 5  state=(v=4, equipped=0, kits={1,6,12}, K=[F,F,C,U,U,U,F])
+        transitions:
+          - TRAVERSE -> 5  cost=3  next=[557(p=1)]
+          - TRAVERSE -> 1  cost=6  next=[569(p=1)]
+[119] Val=14.413  a=TRAVERSE -> 10  state=(v=6, equipped=0, kits={1,6,12}, K=[F,U,C,U,U,U,U])
+        transitions:
+          - EQUIP          cost=2  next=[570(p=1)]
+          - TRAVERSE -> 5  cost=2  next=[20(p=1)]
+          - TRAVERSE -> 7  cost=2  next=[571(p=0.7), 572(p=0.3)]
+          - TRAVERSE -> 10 cost=4  next=[573(p=0.9), 574(p=0.1)]
+[120] Val=19.0  a=TRAVERSE -> 5  state=(v=2, equipped=0, kits={1,6,12}, K=[F,U,C,U,U,U,U])
+        transitions:
+          - TRAVERSE -> 1  cost=2  next=[575(p=1)]
+          - TRAVERSE -> 5  cost=5  next=[20(p=1)]
+[121] Val=8.0  a=TRAVERSE -> 13  state=(v=9, equipped=0, kits={1,6,12}, K=[F,U,C,U,C,U,U])
+        transitions:
+          - TRAVERSE -> 8  cost=2  next=[576(p=0.49), 577(p=0.21), 578(p=0.21), 579(p=0.09)]
+          - TRAVERSE -> 10 cost=2  next=[573(p=1)]
+          - TRAVERSE -> 13 cost=5  next=[580(p=1)]
+          - TRAVERSE -> 5  cost=6  next=[581(p=1)]
+[122] Val=8.0  a=TRAVERSE -> 13  state=(v=9, equipped=0, kits={1,6,12}, K=[F,U,C,U,F,U,U])
+        transitions:
+          - TRAVERSE -> 8  cost=2  next=[582(p=0.49), 583(p=0.21), 584(p=0.21), 585(p=0.09)]
+          - TRAVERSE -> 13 cost=5  next=[586(p=1)]
+          - TRAVERSE -> 5  cost=6  next=[587(p=1)]
+[123] Val=14.0  a=TRAVERSE -> 8  state=(v=4, equipped=0, kits={1,6,12}, K=[F,C,F,U,U,U,C])
+        transitions:
+          - TRAVERSE -> 3  cost=2  next=[588(p=1)]
+          - TRAVERSE -> 5  cost=3  next=[545(p=1)]
+          - TRAVERSE -> 8  cost=5  next=[589(p=0.7), 590(p=0.3)]
+          - TRAVERSE -> 1  cost=6  next=[591(p=1)]
+[124] Val=17.0  a=TRAVERSE -> 5  state=(v=4, equipped=0, kits={1,6,12}, K=[F,C,F,U,U,U,F])
+        transitions:
+          - TRAVERSE -> 3  cost=2  next=[592(p=1)]
+          - TRAVERSE -> 5  cost=3  next=[550(p=1)]
+          - TRAVERSE -> 1  cost=6  next=[593(p=1)]
+[125] Val=14.0  a=TRAVERSE -> 8  state=(v=4, equipped=0, kits={1,6,12}, K=[F,F,F,U,U,U,C])
+        transitions:
+          - TRAVERSE -> 5  cost=3  next=[553(p=1)]
+          - TRAVERSE -> 8  cost=5  next=[594(p=0.7), 595(p=0.3)]
+          - TRAVERSE -> 1  cost=6  next=[596(p=1)]
+[126] Val=17.0  a=TRAVERSE -> 5  state=(v=4, equipped=0, kits={1,6,12}, K=[F,F,F,U,U,U,F])
+        transitions:
+          - TRAVERSE -> 5  cost=3  next=[558(p=1)]
+          - TRAVERSE -> 1  cost=6  next=[597(p=1)]
+[127] Val=19.0  a=TRAVERSE -> 5  state=(v=2, equipped=0, kits={1,6,12}, K=[F,U,F,U,U,U,U])
+        transitions:
+          - TRAVERSE -> 1  cost=2  next=[598(p=1)]
+          - TRAVERSE -> 5  cost=5  next=[21(p=1)]
+[128] Val=8.0  a=TRAVERSE -> 13  state=(v=9, equipped=0, kits={1,6,12}, K=[F,U,F,U,C,U,U])
+        transitions:
+          - TRAVERSE -> 8  cost=2  next=[599(p=0.49), 600(p=0.21), 601(p=0.21), 602(p=0.09)]
+          - TRAVERSE -> 10 cost=2  next=[603(p=1)]
+          - TRAVERSE -> 13 cost=5  next=[604(p=1)]
+          - TRAVERSE -> 5  cost=6  next=[605(p=1)]
+[129] Val=8.0  a=TRAVERSE -> 13  state=(v=9, equipped=0, kits={1,6,12}, K=[F,U,F,U,F,U,U])
+        transitions:
+          - TRAVERSE -> 8  cost=2  next=[606(p=0.49), 607(p=0.21), 608(p=0.21), 609(p=0.09)]
+          - TRAVERSE -> 13 cost=5  next=[610(p=1)]
+          - TRAVERSE -> 5  cost=6  next=[611(p=1)]
+[130] Val=18.0  a=TRAVERSE -> 3  state=(v=2, equipped=0, kits={1,6,12}, K=[C,C,U,U,U,U,C])
+        transitions:
+          - TRAVERSE -> 1  cost=2  next=[448(p=1)]
+          - TRAVERSE -> 3  cost=2  next=[22(p=1)]
+          - TRAVERSE -> 5  cost=5  next=[444(p=0.8), 445(p=0.2)]
+[131] Val=12.0  a=TRAVERSE -> 8  state=(v=7, equipped=0, kits={1,6,12}, K=[C,C,U,C,U,U,C])
+        transitions:
+          - TRAVERSE -> 6  cost=2  next=[612(p=0.8), 613(p=0.2)]
+          - TRAVERSE -> 8  cost=3  next=[446(p=1)]
+          - TRAVERSE -> 3  cost=4  next=[614(p=1)]
+          - TRAVERSE -> 11 cost=5  next=[615(p=0.65), 616(p=0.35)]
+[132] Val=14.492  a=TRAVERSE -> 11  state=(v=7, equipped=0, kits={1,6,12}, K=[C,C,U,F,U,U,C])
+        transitions:
+          - TRAVERSE -> 6  cost=2  next=[617(p=0.8), 618(p=0.2)]
+          - TRAVERSE -> 3  cost=4  next=[619(p=1)]
+          - TRAVERSE -> 11 cost=5  next=[620(p=0.65), 621(p=0.35)]
+[133] Val=12.0  a=TRAVERSE -> 8  state=(v=7, equipped=0, kits={1,6,12}, K=[F,C,U,C,U,U,C])
+        transitions:
+          - TRAVERSE -> 6  cost=2  next=[622(p=0.8), 623(p=0.2)]
+          - TRAVERSE -> 8  cost=3  next=[546(p=1)]
+          - TRAVERSE -> 3  cost=4  next=[624(p=1)]
+          - TRAVERSE -> 11 cost=5  next=[625(p=0.65), 626(p=0.35)]
+[134] Val=14.492  a=TRAVERSE -> 11  state=(v=7, equipped=0, kits={1,6,12}, K=[F,C,U,F,U,U,C])
+        transitions:
+          - TRAVERSE -> 6  cost=2  next=[627(p=0.8), 628(p=0.2)]
+          - TRAVERSE -> 3  cost=4  next=[629(p=1)]
+          - TRAVERSE -> 11 cost=5  next=[630(p=0.65), 631(p=0.35)]
+[135] Val=14.0  a=TRAVERSE -> 8  state=(v=4, equipped=0, kits={1,6,12}, K=[U,C,C,U,U,U,C])
+        transitions:
+          - TRAVERSE -> 3  cost=2  next=[488(p=0.85), 560(p=0.15)]
+          - TRAVERSE -> 5  cost=3  next=[24(p=1)]
+          - TRAVERSE -> 8  cost=5  next=[632(p=0.7), 633(p=0.3)]
+          - TRAVERSE -> 1  cost=6  next=[634(p=1)]
+[136] Val=14.413  a=TRAVERSE -> 10  state=(v=6, equipped=0, kits={1,6,12}, K=[U,C,C,U,U,U,C])
+        transitions:
+          - EQUIP          cost=2  next=[635(p=1)]
+          - TRAVERSE -> 5  cost=2  next=[24(p=1)]
+          - TRAVERSE -> 7  cost=2  next=[636(p=0.7), 637(p=0.3)]
+          - TRAVERSE -> 10 cost=4  next=[638(p=0.9), 639(p=0.1)]
+[137] Val=18.0  a=TRAVERSE -> 3  state=(v=2, equipped=0, kits={1,6,12}, K=[C,C,C,U,U,U,C])
+        transitions:
+          - TRAVERSE -> 1  cost=2  next=[491(p=1)]
+          - TRAVERSE -> 3  cost=2  next=[488(p=1)]
+          - TRAVERSE -> 5  cost=5  next=[444(p=1)]
+[138] Val=19.0  a=TRAVERSE -> 5  state=(v=2, equipped=0, kits={1,6,12}, K=[F,C,C,U,U,U,C])
+        transitions:
+          - TRAVERSE -> 1  cost=2  next=[563(p=1)]
+          - TRAVERSE -> 5  cost=5  next=[544(p=1)]
+[139] Val=8.0  a=TRAVERSE -> 13  state=(v=9, equipped=0, kits={1,6,12}, K=[U,C,C,U,C,U,C])
+        transitions:
+          - TRAVERSE -> 8  cost=2  next=[640(p=0.7), 641(p=0.3)]
+          - TRAVERSE -> 10 cost=2  next=[638(p=1)]
+          - TRAVERSE -> 13 cost=5  next=[642(p=1)]
+          - TRAVERSE -> 5  cost=6  next=[643(p=1)]
+[140] Val=8.0  a=TRAVERSE -> 13  state=(v=9, equipped=0, kits={1,6,12}, K=[U,C,C,U,F,U,C])
+        transitions:
+          - TRAVERSE -> 8  cost=2  next=[644(p=0.7), 645(p=0.3)]
+          - TRAVERSE -> 13 cost=5  next=[646(p=1)]
+          - TRAVERSE -> 5  cost=6  next=[647(p=1)]
+[141] Val=14.0  a=TRAVERSE -> 8  state=(v=4, equipped=0, kits={1,6,12}, K=[U,C,F,U,U,U,C])
+        transitions:
+          - TRAVERSE -> 3  cost=2  next=[518(p=0.85), 588(p=0.15)]
+          - TRAVERSE -> 5  cost=3  next=[25(p=1)]
+          - TRAVERSE -> 8  cost=5  next=[648(p=0.7), 649(p=0.3)]
+          - TRAVERSE -> 1  cost=6  next=[650(p=1)]
+[142] Val=18.0  a=TRAVERSE -> 3  state=(v=2, equipped=0, kits={1,6,12}, K=[C,C,F,U,U,U,C])
+        transitions:
+          - TRAVERSE -> 1  cost=2  next=[521(p=1)]
+          - TRAVERSE -> 3  cost=2  next=[518(p=1)]
+          - TRAVERSE -> 5  cost=5  next=[445(p=1)]
+[143] Val=19.0  a=TRAVERSE -> 5  state=(v=2, equipped=0, kits={1,6,12}, K=[F,C,F,U,U,U,C])
+        transitions:
+          - TRAVERSE -> 1  cost=2  next=[591(p=1)]
+          - TRAVERSE -> 5  cost=5  next=[545(p=1)]
+[144] Val=8.0  a=TRAVERSE -> 13  state=(v=9, equipped=0, kits={1,6,12}, K=[U,C,F,U,C,U,C])
+        transitions:
+          - TRAVERSE -> 8  cost=2  next=[651(p=0.7), 652(p=0.3)]
+          - TRAVERSE -> 10 cost=2  next=[653(p=1)]
+          - TRAVERSE -> 13 cost=5  next=[654(p=1)]
+          - TRAVERSE -> 5  cost=6  next=[655(p=1)]
+[145] Val=8.0  a=TRAVERSE -> 13  state=(v=9, equipped=0, kits={1,6,12}, K=[U,C,F,U,F,U,C])
+        transitions:
+          - TRAVERSE -> 8  cost=2  next=[656(p=0.7), 657(p=0.3)]
+          - TRAVERSE -> 13 cost=5  next=[658(p=1)]
+          - TRAVERSE -> 5  cost=6  next=[659(p=1)]
+[146] Val=12.0  a=TRAVERSE -> 8  state=(v=7, equipped=0, kits={1,6,12}, K=[U,C,U,C,U,U,C])
+        transitions:
+          - TRAVERSE -> 6  cost=2  next=[660(p=0.8), 661(p=0.2)]
+          - TRAVERSE -> 8  cost=3  next=[26(p=1)]
+          - TRAVERSE -> 3  cost=4  next=[614(p=0.85), 624(p=0.15)]
+          - TRAVERSE -> 11 cost=5  next=[662(p=0.65), 663(p=0.35)]
+[147] Val=8.0  a=TRAVERSE -> 13  state=(v=9, equipped=0, kits={1,6,12}, K=[U,C,U,C,C,U,C])
+        transitions:
+          - TRAVERSE -> 8  cost=2  next=[664(p=1)]
+          - TRAVERSE -> 10 cost=2  next=[665(p=1)]
+          - TRAVERSE -> 13 cost=5  next=[666(p=1)]
+          - TRAVERSE -> 5  cost=6  next=[667(p=0.8), 668(p=0.2)]
+[148] Val=8.0  a=TRAVERSE -> 13  state=(v=9, equipped=0, kits={1,6,12}, K=[U,C,U,C,F,U,C])
+        transitions:
+          - TRAVERSE -> 8  cost=2  next=[669(p=1)]
+          - TRAVERSE -> 13 cost=5  next=[670(p=1)]
+          - TRAVERSE -> 5  cost=6  next=[671(p=0.8), 672(p=0.2)]
+[149] Val=14.0  a=TRAVERSE -> 8  state=(v=4, equipped=0, kits={1,6,12}, K=[U,C,U,C,U,U,C])
+        transitions:
+          - TRAVERSE -> 3  cost=2  next=[614(p=0.85), 624(p=0.15)]
+          - TRAVERSE -> 5  cost=3  next=[673(p=0.8), 674(p=0.2)]
+          - TRAVERSE -> 8  cost=5  next=[26(p=1)]
+          - TRAVERSE -> 1  cost=6  next=[675(p=1)]
+... (stopped after 150 states)
+
+
+================ Simulation 1 / 4 ================
+
+=== Sampled flooding instance ===
+fidx= 0 edge#2 (2-3) p=0.15 -> FLOODED
+fidx= 1 edge#3 (3-4) p=0.25 -> FLOODED
+fidx= 2 edge#5 (5-6) p=0.2 -> CLEAR
+fidx= 3 edge#7 (7-8) p=0.3 -> FLOODED
+fidx= 4 edge#9 (9-10) p=0.1 -> CLEAR
+fidx= 5 edge#11 (11-12) p=0.35 -> FLOODED
+fidx= 6 edge#16 (4-8) p=0.3 -> CLEAR
+
+=== Execution trace ===
+  1) TRAVERSE 1->2 via edge#1 (+2)  t=2.000
+  2) TRAVERSE 2->5 via edge#14 (+5)  t=7.000
+  3) TRAVERSE 5->9 via edge#21 (+6)  t=13.000
+  4) TRAVERSE 9->13 via edge#20 (+5)  t=18.000
+  5) TRAVERSE 13->14 via edge#13 (+3)  t=21.000
+Arrived at target 14. Total time: 21.000
+
+
+================ Simulation 2 / 4 ================
+
+=== Sampled flooding instance ===
+fidx= 0 edge#2 (2-3) p=0.15 -> CLEAR
+fidx= 1 edge#3 (3-4) p=0.25 -> CLEAR
+fidx= 2 edge#5 (5-6) p=0.2 -> FLOODED
+fidx= 3 edge#7 (7-8) p=0.3 -> CLEAR
+fidx= 4 edge#9 (9-10) p=0.1 -> CLEAR
+fidx= 5 edge#11 (11-12) p=0.35 -> FLOODED
+fidx= 6 edge#16 (4-8) p=0.3 -> FLOODED
+
+=== Execution trace ===
+  1) TRAVERSE 1->2 via edge#1 (+2)  t=2.000
+  2) TRAVERSE 2->3 via edge#2 (+2)  t=4.000
+  3) TRAVERSE 3->7 via edge#15 (+4)  t=8.000
+  4) TRAVERSE 7->8 via edge#7 (+3)  t=11.000
+  5) TRAVERSE 8->12 via edge#19 (+4)  t=15.000
+  6) TRAVERSE 12->13 via edge#12 (+2)  t=17.000
+  7) TRAVERSE 13->14 via edge#13 (+3)  t=20.000
+Arrived at target 14. Total time: 20.000
+
+
+================ Simulation 3 / 4 ================
+
+=== Sampled flooding instance ===
+fidx= 0 edge#2 (2-3) p=0.15 -> CLEAR
+fidx= 1 edge#3 (3-4) p=0.25 -> FLOODED
+fidx= 2 edge#5 (5-6) p=0.2 -> CLEAR
+fidx= 3 edge#7 (7-8) p=0.3 -> FLOODED
+fidx= 4 edge#9 (9-10) p=0.1 -> CLEAR
+fidx= 5 edge#11 (11-12) p=0.35 -> CLEAR
+fidx= 6 edge#16 (4-8) p=0.3 -> CLEAR
+
+=== Execution trace ===
+  1) TRAVERSE 1->2 via edge#1 (+2)  t=2.000
+  2) TRAVERSE 2->3 via edge#2 (+2)  t=4.000
+  3) TRAVERSE 3->7 via edge#15 (+4)  t=8.000
+  4) TRAVERSE 7->11 via edge#18 (+5)  t=13.000
+  5) TRAVERSE 11->12 via edge#11 (+2)  t=15.000
+  6) TRAVERSE 12->13 via edge#12 (+2)  t=17.000
+  7) TRAVERSE 13->14 via edge#13 (+3)  t=20.000
+Arrived at target 14. Total time: 20.000
+
+
+================ Simulation 4 / 4 ================
+
+=== Sampled flooding instance ===
+fidx= 0 edge#2 (2-3) p=0.15 -> FLOODED
+fidx= 1 edge#3 (3-4) p=0.25 -> FLOODED
+fidx= 2 edge#5 (5-6) p=0.2 -> CLEAR
+fidx= 3 edge#7 (7-8) p=0.3 -> FLOODED
+fidx= 4 edge#9 (9-10) p=0.1 -> CLEAR
+fidx= 5 edge#11 (11-12) p=0.35 -> CLEAR
+fidx= 6 edge#16 (4-8) p=0.3 -> FLOODED
+
+=== Execution trace ===
+  1) TRAVERSE 1->2 via edge#1 (+2)  t=2.000
+  2) TRAVERSE 2->5 via edge#14 (+5)  t=7.000
+  3) TRAVERSE 5->9 via edge#21 (+6)  t=13.000
+  4) TRAVERSE 9->13 via edge#20 (+5)  t=18.000
+  5) TRAVERSE 13->14 via edge#13 (+3)  t=21.000
+Arrived at target 14. Total time: 21.000

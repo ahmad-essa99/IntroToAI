@@ -1,0 +1,39 @@
+#V 14    ; number of vertices n in graph (from 1 to n)
+             ; Example with 14 vertices and 10 possibly flooded edges
+
+#E1  1 2  W2
+#E2  2 3  W2  F 0.15
+#E3  3 4  W2  F 0.25
+#E4  4 5  W3
+#E5  5 6  W2  F 0.20
+#E6  6 7  W2
+#E7  7 8  W3  F 0.30
+#E8  8 9  W2
+#E9  9 10 W2  F 0.10
+#E10 10 11 W3
+#E11 11 12 W2  F 0.35
+#E12 12 13 W2
+#E13 13 14 W3
+
+; extra connections / shortcuts
+#E14 2 5  W5
+#E15 3 7  W4
+#E16 4 8  W5  F 0.30
+#E17 6 10 W4
+#E18 7 11 W5
+#E19 8 12 W4
+#E20 9 13 W5
+#E21 5 9  W6
+#E22 1 4  W6
+
+; kits (vertices where kits initially exist)
+#K1 1
+#K2 6
+#K3 12
+
+#EC 2            ; Takes 2 units of time to equip an amphibian kit
+#UC 1            ; and 1 unit of time to unequip
+#FF 3            ; Movement with amphibian kit is 3 times as slow as without
+
+#Start 1
+#Target 14
