@@ -59,3 +59,19 @@ The program prints:
 - Expected optimal time from start (before the initial observation at the start vertex).
 - A printout of reachable belief-states (limited by `--print-limit`) with `V(b)` and the optimal action.
 - Simulation traces for `--sims` sampled instances.
+
+## The algorithm employs several key methods:
+
+1. **Input Parsing**: The [`simulator/parser.py`](simulator/parser.py) module reads and validates the problem description, including vertices, edges (with flooding probabilities), kits, costs, and start/target vertices.
+
+2. **Graph Construction**: The [`simulator/graph.py`](simulator/graph.py) and [`simulator/edge.py`](simulator/edge.py) modules represent the undirected weighted graph, tracking floodable edges and their properties.
+
+3. **Belief-State Representation**: The agent's knowledge is encoded as a [`BeliefState`](simulator/belief_state.py:6), which includes the current vertex, equipment status, kit locations, and knowledge about each floodable edge (unknown, clear, or flooded).
+
+4. **MDP Construction**: [`build_reachable_mdp`](simulator/belief_mdp.py:75) enumerates all reachable belief-states and builds the explicit Markov Decision Process (MDP), including possible actions (traverse, equip, unequip) and stochastic transitions due to observations.
+
+5. **Value Iteration**: [`value_iteration`](simulator/belief_mdp.py:206) computes the optimal policy by iteratively updating the expected cost-to-go for each belief-state until convergence.
+
+6. **Simulation**: [`simulator/sampling.py`](simulator/sampling.py) samples a specific flooding scenario, and the main loop in [`simulator/main.py`](simulator/main.py:78) executes the computed policy in this sampled world, updating the agent's knowledge as it moves and observes new edges.
+
+These methods together enable the agent to plan under uncertainty and optimize evacuation time in the presence of probabilistic flooding.
