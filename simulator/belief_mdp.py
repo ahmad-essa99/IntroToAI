@@ -151,29 +151,22 @@ def build_reachable_mdp(
             terminal[i] = True
             continue
 
-        # Equip
-        if (not bs.equipped) and (bs.v in bs.kit_locations):
-            nxt = BeliefState(bs.v, True, bs.kit_locations - {bs.v}, bs.knowledge)
-            transitions[i].append(
-                ActionTransition(
-                    action=(ActionType.EQUIP,),
-                    cost=equip_cost,
-                    next_states=[(state_to_idx[nxt], 1.0)],
+        # Equip/Unequip transitions (merged loop)
+        for equipped, kit_update, action_type, cost in [
+            (False, lambda kits: kits - {bs.v}, ActionType.EQUIP, equip_cost),
+            (True, lambda kits: kits | {bs.v}, ActionType.UNEQUIP, unequip_cost),
+        ]:
+            if bs.equipped == equipped and ((bs.v in bs.kit_locations) if not equipped else True):
+                nxt = BeliefState(bs.v, not equipped, kit_update(bs.kit_locations), bs.knowledge)
+                transitions[i].append(
+                    ActionTransition(
+                        action=(action_type,),
+                        cost=cost,
+                        next_states=[(state_to_idx[nxt], 1.0)],
+                    )
                 )
-            )
 
-        # Unequip
-        if bs.equipped:
-            nxt = BeliefState(bs.v, False, bs.kit_locations | {bs.v}, bs.knowledge)
-            transitions[i].append(
-                ActionTransition(
-                    action=(ActionType.UNEQUIP,),
-                    cost=unequip_cost,
-                    next_states=[(state_to_idx[nxt], 1.0)],
-                )
-            )
-
-        # Traverse
+        # Traverse transitions
         for nxt_v, e in graph.neighbors(bs.v):
             st = edge_status_between(bs.knowledge, bs.v, nxt_v)
             if st == EdgeKnowledge.UNKNOWN:
